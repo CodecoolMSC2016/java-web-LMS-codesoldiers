@@ -1,8 +1,8 @@
-body {
+/*body {
     background-color: #669900;
     align-items: stretch;
     margin: 20% 20% 20% 20%;
-}
+}*/
 
 .linput {
     font-size: 40px;
@@ -12,7 +12,7 @@ body {
 }
 
 .lbutton {
-    background-color: black;
+    background-color: #151515;
     border: none;
     color: white;
     margin-right: 30px;

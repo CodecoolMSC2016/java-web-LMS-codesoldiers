@@ -1,0 +1,24 @@
+body {
+    background-color: #669900;
+    align-items: stretch;
+    margin: 20% 20% 20% 20%;
+}
+
+.linput {
+    font-size: 40px;
+    width: 300px;
+    padding: 30px 30px 30px 30px;
+    margin: 10px 10px 10px 10px;
+}
+
+.lbutton {
+    background-color: black;
+    border: none;
+    color: white;
+    margin-right: 30px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}

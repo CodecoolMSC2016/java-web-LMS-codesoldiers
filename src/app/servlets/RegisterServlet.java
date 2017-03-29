@@ -1,13 +1,47 @@
-/**
- * Created by thomas on 2017.03.29..
- */
-@javax.servlet.annotation.WebServlet(name = "RegisterServlet")
-public class RegisterServlet extends javax.servlet.http.HttpServlet {
-    protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
+package app.servlets;
+
+import app.CSVRW;
+import app.DataManager;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class RegisterServlet extends HttpServlet {
+    CSVRW io;
+    DataManager manager = new DataManager();
+
+    public RegisterServlet() {
+        try {
+            this.io = new CSVRW();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        if (checkInputs()) {
+            register(request.getParameter("email"), request.getParameter("password"));
+        }
+        out.print("asdxD");
+    }
+
+    private void register(String email, String password) {
 
     }
 
-    protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
+    private boolean checkInputs() {
+        return false;
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 }

@@ -14,14 +14,24 @@ public class Login extends HttpServlet {
                 && request.getParameterMap().containsKey("email")) {
             if (users.validate(request.getParameter("email"))) {
                 response.sendRedirect("/");
+
             }
         }
-
+        System.out.println("--post");
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher view = request.getRequestDispatcher("login.html");
-        view.forward(request, response);
+        RequestDispatcher view = request.getRequestDispatcher("index.html");
+        if (request.getParameterMap().keySet().size() > 0) {
+            if (request.getParameterMap().containsKey("email")) {
+                view.forward(request, response);
+            }
+            else {
+
+            }
+        }
+        System.out.println("--get");
+        //view.forward(request, response);
     }
 }

@@ -5,11 +5,11 @@
          version="3.1">
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>LoginServlet</servlet-class>
+        <servlet-class>app.servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WelcomeServlet</servlet-name>
-        <servlet-class>WelcomeServlet</servlet-class>
+        <servlet-class>app.servlets.WelcomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>

@@ -1,3 +1,5 @@
+package app;
+
 public class PageWriter {
     public String getHTMLHead(String title) {
         String result = "";
@@ -36,7 +38,7 @@ public class PageWriter {
 
             }
         }
-                //"    <a href=\"\"><h3 class=\"indent-20 menu_item selected_menu_item\">Login</h3></a>\n";
+                //"    <a href=\"\"><h3 class=\"indent-20 menu_item selected_menu_item\">app.Login</h3></a>\n";
         result += "  </div>\n" +
                 "  <div class=\"indent-20\" id=\"company_name\">\n" +
                 "    <h5>created by</h5>\n" +

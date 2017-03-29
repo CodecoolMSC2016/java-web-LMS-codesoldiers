@@ -1,4 +1,7 @@
-package app;
+package app.servlets;
+
+import app.PageWriter;
+import app.Pages;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -7,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-//@WebServlet(name = "app.WelcomeServlet")
+//@WebServlet(name = "app.servlets.WelcomeServlet")
 public class WelcomeServlet extends HttpServlet {
     PageWriter pageWriter = new PageWriter();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -17,6 +20,7 @@ public class WelcomeServlet extends HttpServlet {
         out.print("<html>");
         out.print(pageWriter.getHTMLHead("Welcome"));
         out.print(pageWriter.getHTMLSidebar(Pages.HOME, request.getParameter("email")));
+        out.print("</html>");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

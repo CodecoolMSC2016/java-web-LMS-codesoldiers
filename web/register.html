@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Home</title>
+    <style>
+        @import "style.css";
+        @import "login.css";
+    </style>
+</head>
+<body>
+<nav id="navbar">
+    <h2 class="indent-30" id="menu_title">Menu</h2>
+    <div id="menu">
+        <a href=""><h3 class="indent-20 menu_item selected_menu_item">Register</h3></a>
+    </div>
+    <div class="indent-20" id="company_name">
+        <h5>created by</h5>
+        <h4>CodeSoldiers</h4>
+        <h5>- 2017 -</h5>
+    </div>
+</nav>
+
+<section id="content">
+    <div class="center">
+        <form class="inside" action="/register" method="post">
+            <input class="linput" type="text" name="email">
+            <br>
+            <input class="linput" type="password" name="pass">
+            <br> <br>
+            <p><input type="checkbox" name="accept">I accept terms of use</p>
+            <input class="lbutton" type="submit" value="Register">
+        </form>
+    </div>
+</section>
+
+</body>
+</html>

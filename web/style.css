@@ -91,3 +91,9 @@ p {
     color: goldenrod;
     font-size: 10px;
 }
+
+.emptybutton {
+    background: transparent;
+    border-color: transparent;
+    font-family: inherit;
+}

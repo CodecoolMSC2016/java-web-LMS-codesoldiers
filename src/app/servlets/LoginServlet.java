@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         session.removeAttribute("user");
 
         if (logIn(user, pass)) {
-            session.setAttribute("user", "admin");
+            session.setAttribute("user", user);
             response.sendRedirect("welcome");
         } else {
             out.println("<p style='margin-left: 250'>Username or password incorrect</p>");

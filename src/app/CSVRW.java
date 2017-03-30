@@ -21,11 +21,16 @@ public class CSVRW {
         }
     }
 
-    public void saveToCSV(List<User> userDatabase) throws IOException {
-        PrintWriter pw = new PrintWriter(userDatabaseCsv);
-        // Username,EmailAddress,Role,Password
-        for (Object register : userDatabase) {
-            pw.append(register.toString());
+    public void saveToCSV(List<User> userdb) {
+        PrintWriter pw;
+        try {
+            // Username,EmailAddress,Role,Password
+            pw = new PrintWriter(userDatabaseCsv);
+            for (Object register : userdb) {
+                pw.append(register.toString());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

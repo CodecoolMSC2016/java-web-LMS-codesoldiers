@@ -2,6 +2,7 @@ package app.servlets;
 
 import app.CSVRW;
 import app.DataManager;
+import app.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 public class RegisterServlet extends HttpServlet {
     CSVRW io;
@@ -22,12 +24,23 @@ public class RegisterServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         if (checkInputs()) {
-            register(request.getParameter("email"), request.getParameter("password"));
+            register(request.getParameter("user"),
+                    request.getParameter("email"),
+                    request.getParameter("role"),
+                    request.getParameter("password"));
         }
         out.print("asdxD");
     }
 
-    private void register(String email, String password) {
+    private void register(String user, String email, String role, String password) {
+        // list from readcsv
+        List<User> userList = io.readCSVDatabase();
+        // new user from params
+        User newUser = new User(user, email, role, password);
+        // add user to readcsv list
+        userList.add(newUser);
+        // saveto csv
+        io.saveToCSV(userList);
 
     }
 
@@ -36,6 +49,6 @@ public class RegisterServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendRedirect("/login");
     }
 }

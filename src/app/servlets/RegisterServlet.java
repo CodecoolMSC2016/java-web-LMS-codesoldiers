@@ -4,11 +4,9 @@ import app.CSVRW;
 import app.DataManager;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -17,11 +15,7 @@ public class RegisterServlet extends HttpServlet {
     DataManager manager = new DataManager();
 
     public RegisterServlet() {
-        try {
-            this.io = new CSVRW();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        this.io = new CSVRW();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,5 +1,6 @@
 package app.servlets;
 
+import app.CSVRW;
 import app.User;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginServlet extends HttpServlet {
@@ -17,7 +19,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        String email = request.getParameter("email");
+        String user = request.getParameter("email");
         String pass = request.getParameter("pass");
 
         RequestDispatcher login = request.getRequestDispatcher("login.html");
@@ -25,14 +27,10 @@ public class LoginServlet extends HttpServlet {
 
         session.removeAttribute("user");
 
-
-        if(email.equals("admin") && pass.equals("pass"))
-        {
+        if (logIn(user, pass)) {
             session.setAttribute("user", "admin");
             response.sendRedirect("welcome");
-        }
-        else
-        {
+        } else {
             out.println("<p style='margin-left: 250'>Username or password incorrect</p>");
             login.include(request, response);
         }
@@ -42,20 +40,19 @@ public class LoginServlet extends HttpServlet {
         RequestDispatcher login = request.getRequestDispatcher("login.html");
         login.forward(request, response);
     }
-    public boolean logIn(List<User> userList, String userlogin, String userPassword) throws Exception{
-        boolean login = false;
-        boolean usermatch = false;
-        boolean passwordmatch =false;
-        for(User user : userList ){
-            if(user.getUsername().equals(userlogin) && user.getPassword().equals(userPassword)){
-                usermatch = true;
-                passwordmatch = true;
-            }
-            if(passwordmatch && usermatch){
-                login = true;
-            }
 
+    public boolean logIn(String userlogin, String userPassword) {
+        try {
+            CSVRW db = new CSVRW();
+            List<User> userdb = db.readCSVDatabase();
+            for (User user : userdb) {
+                if (user.getEmail().equals(userlogin) && user.getPassword().equals(userPassword)) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            return false;
         }
-        return login;
+        return false;
     }
 }

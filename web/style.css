@@ -70,6 +70,14 @@ p {
     font-size: 15px;
 }
 
+.left {
+    float: left;
+}
+
+.sideleft {
+    margin-left: 40;
+}
+
 .card {
     padding: 10px 100px 10px 50px;
     margin: 10px 10px 20px 10px;

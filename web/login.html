@@ -1,39 +1,36 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <style>
-        @import "style.css";
-        @import "login.css";
-    </style>
+  <title>Home</title>
+  <style>
+    @import "style.css";
+    @import "login.css";
+  </style>
 </head>
 <body>
-    <nav id="navbar">
-        <h2 class="indent-30" id="menu_title">Menu</h2>
-        <div id="menu">
-            <a href=""><h3 class="indent-20 menu_item ">Home</h3></a>
-            <a href="login"><h3 class="indent-20 menu_item selected_menu_item">app.Login</h3></a>
-            <a href="products.html"><h3 class="indent-20 menu_item">Attendance</h3></a>
-            <a href="contacts.html"><h3 class="indent-20 menu_item">My stuffs</h3></a>
-        </div>
-        <div class="indent-20" id="company_name">
-            <h5>created by</h5>
-            <h4>CodeSoldiers</h4>
-            <h5>- 2017 -</h5>
-        </div>
-    </nav>
+<nav id="navbar">
+  <h2 class="indent-30" id="menu_title">Menu</h2>
+  <div id="menu">
+    <a href=""><h3 class="indent-20 menu_item selected_menu_item">Login</h3></a>
+  </div>
+  <div class="indent-20" id="company_name">
+    <h5>created by</h5>
+    <h4>CodeSoldiers</h4>
+    <h5>- 2017 -</h5>
+  </div>
+</nav>
 
-    <section id="content">
-        <div id="card" class="">
-            <h3>Title</h3>
-            <p>
-                tasks<br>fsdfsddds <br> fdsfsdf <br> asdsdsda <br>
-                <a href="#">see details</a>
-            </p>
-        </div>
-
-    </section>
+<section id="content">
+  <div class="center">
+    <form class="inside" action="/login" method="post">
+      <input class="linput" type="text" name="email">
+      <br>
+      <input class="linput" type="password" name="pass">
+      <br> <br>
+      <input class="lbutton" type="button" name="regbutton" value="Register" onclick="location.href='register.html';">
+      <input class="lbutton" type="submit" value="Login">
+    </form>
+  </div>
+</section>
 
 </body>
 </html>

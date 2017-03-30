@@ -17,7 +17,7 @@ public class User {
 
     @Override
     public String toString() {
-        return this.username + ";" + this.emailAddress + ";" + this.role;
+        return username + ";" + emailAddress + ";" + role + ";" + password;
     }
 
     public String getPassword() {

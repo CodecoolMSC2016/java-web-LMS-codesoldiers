@@ -26,9 +26,10 @@ public class CSVRW {
         try {
             // Username,EmailAddress,Role,Password
             pw = new PrintWriter(userDatabaseCsv);
-            for (Object register : userdb) {
-                pw.append(register.toString());
+            for (User register : userdb) {
+                pw.append(register.toString() + "\n");
             }
+            pw.flush();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

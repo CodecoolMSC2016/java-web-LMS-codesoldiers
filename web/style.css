@@ -65,9 +65,11 @@ p {
     font-size: 15px;
 }
 
-#card {
+.card {
+    float: left;
     width: 60px;
     padding: 10px 100px 10px 50px;
+    margin: 10px 10px 10px 10px;
     background-color: #FFFFFF;
     opacity: 0.5;
     -webkit-box-shadow: 10px 10px 26px -3px rgba(0,0,0,0.75);

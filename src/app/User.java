@@ -1,7 +1,5 @@
 package app;
 
-import java.util.ArrayList;
-import java.io.*;
 public class User {
     private String username;
     private String emailAddress;
@@ -16,16 +14,23 @@ public class User {
         this.password = password;
 
     }
+
     @Override
-    public String toString(){
-        return this.username + ";" + this.emailAddress + ";" + this.role ;
+    public String toString() {
+        return this.username + ";" + this.emailAddress + ";" + this.role;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public String getUsername(){return username;}
+    public String getRole() {
+        return role;
+    }
+
+    public String getEmail() {
+        return emailAddress;
+    }
 
 }
 

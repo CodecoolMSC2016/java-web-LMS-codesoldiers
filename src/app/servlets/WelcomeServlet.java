@@ -27,12 +27,6 @@ public class WelcomeServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("user") == null) {
-            response.sendRedirect("login");
-        } else {
-            RequestDispatcher welcome = request.getRequestDispatcher("welcome.html");
-            welcome.forward(request, response);
-        }
+        LoginHelper.checkLogin(request, response, "welcome.html");
     }
 }

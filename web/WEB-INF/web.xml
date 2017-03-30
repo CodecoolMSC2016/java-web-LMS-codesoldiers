@@ -19,6 +19,10 @@
         <servlet-name>WelcomeServlet</servlet-name>
         <servlet-class>app.servlets.WelcomeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserlistServlet</servlet-name>
+        <servlet-class>app.servlets.UserlistServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
@@ -35,5 +39,9 @@
     <servlet-mapping>
         <servlet-name>WelcomeServlet</servlet-name>
         <url-pattern>/welcome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserlistServlet</servlet-name>
+        <url-pattern>/userlist</url-pattern>
     </servlet-mapping>
 </web-app>

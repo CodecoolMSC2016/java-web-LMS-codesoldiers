@@ -26,9 +26,9 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         session.removeAttribute("user");
-
-        if (logIn(user, pass)) {
-            session.setAttribute("user", user);
+        User logged = logIn(user, pass);
+        if (logged != null) {
+            session.setAttribute("user", logged);
             response.sendRedirect("welcome");
         } else {
             out.println("<p style='margin-left: 250'>Username or password incorrect</p>");
@@ -41,18 +41,18 @@ public class LoginServlet extends HttpServlet {
         login.forward(request, response);
     }
 
-    public boolean logIn(String userlogin, String userPassword) {
+    public User logIn(String userlogin, String userPassword) {
         try {
             CSVRW db = new CSVRW();
             List<User> userdb = db.readCSVDatabase();
             for (User user : userdb) {
                 if (user.getEmail().equals(userlogin) && user.getPassword().equals(userPassword)) {
-                    return true;
+                    return user;
                 }
             }
         } catch (Exception e) {
-            return false;
+            return null;
         }
-        return false;
+        return null;
     }
 }

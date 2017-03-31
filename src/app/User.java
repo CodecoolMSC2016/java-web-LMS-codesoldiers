@@ -32,6 +32,9 @@ public class User {
         return emailAddress;
     }
 
+    public String getUsername() {
+        return username;
+    }
 }
 
 

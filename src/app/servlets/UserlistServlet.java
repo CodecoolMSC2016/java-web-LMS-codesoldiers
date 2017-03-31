@@ -27,18 +27,20 @@ public class UserlistServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         //out.print("userlist!!44!négy!!!");
         HttpSession session = request.getSession();
-        String user = (String) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         out.print(session.getAttribute("user"));
         out.print(pageWriter.getHTMLHead("Users"));
-        out.print(pageWriter.getHTMLSidebar(Pages.USERS ,user));
+        out.print(pageWriter.getHTMLSidebar(Pages.USERS ,user.getUsername()));
         out.print("<section id='content'>");
         try {
             CSVRW db = new CSVRW();
             List<User> userdb = db.readCSVDatabase();
             for (User cUser : userdb) {
-                String cUserRole = cUser.getRole();
-                String cUserEmail = cUser.getEmail();
-                out.print(pageWriter.getCard(cUserRole, cUserEmail, ""));
+                if (user.getRole().equals("mentor") || cUser.getRole().equals("student")) {
+                    String cUserRole = cUser.getRole();
+                    String cUserEmail = cUser.getEmail();
+                    out.print(pageWriter.getCard(cUserRole, cUserEmail, ""));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

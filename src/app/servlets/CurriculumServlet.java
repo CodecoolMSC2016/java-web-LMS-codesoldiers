@@ -39,6 +39,8 @@ public class CurriculumServlet extends HttpServlet {
         }
         if (error >= 400) {
             response.sendError(error);
+        } else {
+            response.sendRedirect("/curriculum");
         }
     }
 

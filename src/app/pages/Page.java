@@ -20,4 +20,8 @@ public abstract class Page {
     protected void Unpublish() {
         published = false;
     }
+
+    public long getId() {
+        return id;
+    }
 }

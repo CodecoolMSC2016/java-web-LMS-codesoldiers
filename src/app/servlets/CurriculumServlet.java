@@ -7,20 +7,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 public class CurriculumServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PageManager pageManager = PageManager.getInstance();
         String method = request.getParameter("method");
+
+        Map<String, String[]> parameterMap = request.getParameterMap();
         switch (method) {
             case "delete":
-                delete();
+                delete(parameterMap);
                 break;
             case "modify":
-                modify();
+                modify(parameterMap);
                 break;
             case "put":
-                put();
+                put(parameterMap);
                 break;
             default:
                 response.sendError(404);
@@ -28,15 +31,18 @@ public class CurriculumServlet extends HttpServlet {
         }
     }
 
-    private void delete() {
+    private void delete(Map<String, String[]> parameterMap) {
+        // required params: id
 
     }
 
-    private void modify() {
+    private void modify(Map<String, String[]> parameterMap) {
+        // required params: id, modified property's name, modified value
 
     }
 
-    private void put() {
+    private void put(Map<String, String[]> parameterMap) {
+        // required params: page type, title, [content] || [question, maxScore]
 
     }
 

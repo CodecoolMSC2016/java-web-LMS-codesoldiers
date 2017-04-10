@@ -4,21 +4,20 @@ import app.pages.AssignmentPage;
 import app.pages.Page;
 import app.pages.TextPage;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PageManager {
     private static PageManager ourInstance = new PageManager();
-
-    public static PageManager getInstance() {
-        return ourInstance;
-    }
-
     private List<Page> pages;
 
     private PageManager() {
-        pages = new ArrayList<>();
+        pages = new LinkedList<>();
         Page.lastId = -1;
+    }
+
+    public static PageManager getInstance() {
+        return ourInstance;
     }
 
     public void addTextPage(String title, String content) {
@@ -27,5 +26,19 @@ public class PageManager {
 
     public void addAssignmentPage(String title, String question, int maxScore) {
         pages.add(new AssignmentPage(title, question, maxScore));
+    }
+
+    public boolean removePageById(int id) {
+        for (int i = 0; i < pages.size(); i++) {
+            if (pages.get(i).getId() == id) {
+                pages.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void reorderPages() {
+
     }
 }

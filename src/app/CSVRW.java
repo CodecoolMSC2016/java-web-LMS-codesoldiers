@@ -8,7 +8,8 @@ public class CSVRW {
     private File userDatabaseCsv = new File("userdatabase.csv");
     private FileReader fr;
 
-    public CSVRW() {
+    public CSVRW(String filename) {
+        userDatabaseCsv = new File(filename);
         try {
             fr = new FileReader(userDatabaseCsv);
         } catch (FileNotFoundException fnfe) {

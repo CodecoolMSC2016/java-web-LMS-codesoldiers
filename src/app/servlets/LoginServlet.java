@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 
     public User logIn(String userlogin, String userPassword) {
         try {
-            CSVRW db = new CSVRW();
+            CSVRW db = new CSVRW("userdatabase.csv");
             List<User> userdb = db.readCSVDatabase();
             for (User user : userdb) {
                 if (user.getEmail().equals(userlogin) && user.getPassword().equals(userPassword)) {

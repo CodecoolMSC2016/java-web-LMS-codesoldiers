@@ -17,15 +17,15 @@ import java.util.List;
 
 
 public class UserlistServlet extends HttpServlet {
-    PageWriter pageWriter = new PageWriter();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PageWriter pageWriter = new PageWriter();
+
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        //out.print("userlist!!44!négy!!!");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         out.print(session.getAttribute("user"));
@@ -33,7 +33,7 @@ public class UserlistServlet extends HttpServlet {
         out.print(pageWriter.getHTMLSidebar(Pages.USERS ,user.getUsername()));
         out.print("<section id='content'>");
         try {
-            CSVRW db = new CSVRW();
+            CSVRW db = new CSVRW("userdatabase.csv");
             List<User> userdb = db.readCSVDatabase();
             for (User cUser : userdb) {
                 if (user.getRole().equals("mentor") || cUser.getRole().equals("student")) {

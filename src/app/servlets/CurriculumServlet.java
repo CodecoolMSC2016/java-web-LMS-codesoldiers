@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class CurriculumServlet extends HttpServlet {
@@ -113,8 +115,14 @@ public class CurriculumServlet extends HttpServlet {
     private int reorderPages(PageManager pageManager, Map<String, String[]> parameterMap) {
         Gson gson = new Gson();
         String json = parameterMap.get("json")[0];
-        LinkedHashMap lhm = gson.fromJson(json, LinkedHashMap.class);
-        System.out.println(lhm.toString());
+        System.out.println("asd:" + json);
+        Map<String, Double> jsonMap = new LinkedHashMap<>();
+        jsonMap = gson.fromJson(json, jsonMap.getClass());
+        LinkedList<Integer> list = new LinkedList<Integer>();
+        for (Double value : jsonMap.values()) {
+            list.add(value.intValue());
+        }
+        System.out.println(list.toString());
         return -1;
     }
 
@@ -122,7 +130,7 @@ public class CurriculumServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         String asd = (String) request.getParameter("posts");
-        System.out.print(asd);
+        //System.out.print(asd);
         out.print(asd);
         PageManager pageManager = PageManager.getInstance();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("curriculum.html");

@@ -39,7 +39,7 @@ public class CurriculumServlet extends HttpServlet {
                 addAssignmentPage(pageManager, parameterMap);
                 break;
             case "reorder":
-                System.out.println(parameterMap.get("json")[0]);
+                // System.out.println(parameterMap.get("json")[0]);
                 reorderPages(pageManager, parameterMap);
                 error = 200;
                 break;
@@ -115,13 +115,8 @@ public class CurriculumServlet extends HttpServlet {
     private int reorderPages(PageManager pageManager, Map<String, String[]> parameterMap) {
         Gson gson = new Gson();
         String json = parameterMap.get("json")[0];
-        System.out.println("asd:" + json);
-        Map<String, Double> jsonMap = new LinkedHashMap<>();
-        jsonMap = gson.fromJson(json, jsonMap.getClass());
-        LinkedList<Integer> list = new LinkedList<Integer>();
-        for (Double value : jsonMap.values()) {
-            list.add(value.intValue());
-        }
+        LinkedList<Integer> list = new LinkedList<>();
+        list = gson.fromJson(json, list.getClass());
         System.out.println(list.toString());
         return -1;
     }

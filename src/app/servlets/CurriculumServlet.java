@@ -1,6 +1,7 @@
 package app.servlets;
 
 import app.PageManager;
+import app.User;
 import com.google.gson.Gson;
 
 import javax.servlet.RequestDispatcher;
@@ -114,16 +115,20 @@ public class CurriculumServlet extends HttpServlet {
         Gson gson = new Gson();
         String json = parameterMap.get("json")[0];
         LinkedHashMap lhm = gson.fromJson(json, LinkedHashMap.class);
-        System.out.println(lhm.toString());
+        /*System.out.println(lhm.toString());*/
         return -1;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        String asd = (String) request.getParameter("posts");
-        System.out.print(asd);
-        out.print(asd);
+        Map map = request.getParameterMap();
+        System.out.println(map);
+        boolean isGetRole = true;
+        if(isGetRole) {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(((User)(request.getSession()).getAttribute("user")).getRole());
+        }
+        System.out.println(((User)(request.getSession()).getAttribute("user")).getRole());
         PageManager pageManager = PageManager.getInstance();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("curriculum.html");
         requestDispatcher.forward(request, response);

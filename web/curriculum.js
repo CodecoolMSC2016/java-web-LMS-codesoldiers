@@ -21,9 +21,31 @@ $(document).ready(function() {
                  data: //posts array
                  });
                  */
+                /*alert("resorted");
+                $.ajax("/welcome", {
+                    type: "GET",
+                    data: JSON.stringify(posts),
+                    success: function () {
+                        alert("success");
+                    },
+                    dataType: "json"
+                });*/
             });
 
-            var postsPosts = JSON.parse(posts);
+
+            var postsJson = JSON.stringify(posts);
+            alert("resorted");
+            /*$.ajax({
+                type: "POST",
+                url: "/curriculum",
+                data: postsJson,
+                success: function () {
+                    alert("success");
+                },
+                dataType: "json"
+            });*/
+            $.post("/curriculum", {method: "reorder", json: postsJson});
+
 
 
         }

@@ -1,6 +1,7 @@
 package app.servlets;
 
 import app.PageManager;
+import com.google.gson.Gson;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CurriculumServlet extends HttpServlet {
@@ -33,6 +35,11 @@ public class CurriculumServlet extends HttpServlet {
             case "addAssignmentPage":
                 // title, question, maxScore
                 addAssignmentPage(pageManager, parameterMap);
+                break;
+            case "reorder":
+                System.out.println(parameterMap.get("json")[0]);
+                reorderPages(pageManager, parameterMap);
+                error = 200;
                 break;
             default:
                 error = 404;
@@ -101,6 +108,14 @@ public class CurriculumServlet extends HttpServlet {
             }
         }
         return 400;
+    }
+
+    private int reorderPages(PageManager pageManager, Map<String, String[]> parameterMap) {
+        Gson gson = new Gson();
+        String json = parameterMap.get("json")[0];
+        LinkedHashMap lhm = gson.fromJson(json, LinkedHashMap.class);
+        System.out.println(lhm.toString());
+        return -1;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

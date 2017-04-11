@@ -2,6 +2,7 @@ package app.servlets;
 
 import app.PageManager;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,10 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.lang.reflect.Type;
+import java.util.*;
 
 public class CurriculumServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -113,18 +112,20 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     private int reorderPages(PageManager pageManager, Map<String, String[]> parameterMap) {
+        Type type = new TypeToken<LinkedList<Integer>>(){}.getType();
         Gson gson = new Gson();
+
         String json = parameterMap.get("json")[0];
-        LinkedList<Integer> list = new LinkedList<>();
-        list = gson.fromJson(json, list.getClass());
-        System.out.println(list.toString());
+        LinkedList<Integer> orderList = gson.fromJson(json, type);
+        pageManager.reorderPages(orderList);
+        System.out.println(orderList.toString());
         return -1;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        String asd = (String) request.getParameter("posts");
+        String asd = request.getParameter("posts");
         //System.out.print(asd);
         out.print(asd);
         PageManager pageManager = PageManager.getInstance();

@@ -12,7 +12,7 @@ $(document).ready(function () {
                 // Instead of echoing this, build a real array
                 $('#console').html($('#console').html() + 'posts[' + id + '] = ' + order + '<br>');
                 //alert('posts[' + id + '] = ' + order);
-                posts[order] = id;
+                posts[id - 1] = parseInt(order, 10);
                 // Then do an ajax request to send the array
                 // Update order fields from posts in db
                 /*

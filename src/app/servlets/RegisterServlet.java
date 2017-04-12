@@ -1,7 +1,6 @@
 package app.servlets;
 
 import app.CSVRW;
-import app.DataManager;
 import app.User;
 
 import javax.servlet.ServletException;
@@ -13,13 +12,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 public class RegisterServlet extends HttpServlet {
-    CSVRW io;
-    DataManager manager = new DataManager();
-
-    public RegisterServlet() {
-        this.io = new CSVRW();
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -33,8 +25,9 @@ public class RegisterServlet extends HttpServlet {
     }
 
     private void register(String user, String email, String role, String password) {
+        CSVRW io = new CSVRW("userdatabase.csv");
         // list from readcsv
-        List<User> userList = io.readCSVDatabase();
+        List<User> userList = io.readUserDatabase();
         System.out.println(password);
         // new user from params
         User newUser = new User(user, email, role, password);

@@ -1,4 +1,4 @@
-var posts = {};
+var posts = [];
 
 $(document).ready(function () {
     $.get('/loginstatus', function (data) {
@@ -10,7 +10,7 @@ $(document).ready(function () {
                         var id = $(this).attr('data-post-id');
                         var order = $(this).index();
                         // Instead of echoing this, build a real array
-                        posts[id] = order;
+                        posts[parseInt(id)] = order;
                     });
                     var postsJson = JSON.stringify(posts);
                     $.post("/curriculum", {method: "reorder", json: postsJson});

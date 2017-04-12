@@ -1,7 +1,6 @@
 package app.servlets;
 
 import app.PageManager;
-import app.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -11,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Map;
 
 public class CurriculumServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -113,7 +112,7 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     private int reorderPages(PageManager pageManager, Map<String, String[]> parameterMap) {
-        Type type = new TypeToken<LinkedList<Integer>>(){}.getType();
+        Type type = new TypeToken<LinkedList<Integer>>() {}.getType();
         Gson gson = new Gson();
 
         String json = parameterMap.get("json")[0];

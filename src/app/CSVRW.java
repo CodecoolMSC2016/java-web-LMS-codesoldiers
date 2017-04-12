@@ -1,5 +1,9 @@
 package app;
 
+import app.pages.AssignmentPage;
+import app.pages.Page;
+import app.pages.TextPage;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +48,8 @@ public class CSVRW {
             while ((line = br.readLine()) != null) {
                 String[] temp = line.split(";");
                 tempList.add(new User(temp[0], temp[1], temp[2], temp[3]));
-                return tempList;
             }
+            return tempList;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,10 +63,11 @@ public class CSVRW {
         try {
             while ((line = br.readLine()) != null) {
                 String[] temp = line.split(";");
-            } if(temp.length == 2) {
-                tempList.add(new TextPage(temp[0], temp[1]));
-            } else if(temp.length == 3) {
-                tempList.add(new AssigmentPage(temp[0], temp[1], temp[2]));
+                if (temp.length == 2) {
+                    tempList.add(new TextPage(temp[0], temp[1]));
+                } else if (temp.length == 3) {
+                    tempList.add(new AssignmentPage(temp[0], temp[1], Integer.valueOf(temp[2])));
+                }
                 return tempList;
             }
         } catch (IOException e) {

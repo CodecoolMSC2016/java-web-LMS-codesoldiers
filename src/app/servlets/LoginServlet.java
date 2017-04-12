@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         User logged = logIn(user, pass);
         if (logged != null) {
             session.setAttribute("user", logged);
-            response.sendRedirect("welcome");
+            response.sendRedirect("curriculum");
         } else {
             out.println("<p style='margin-left: 250'>Username or password incorrect</p>");
             login.include(request, response);

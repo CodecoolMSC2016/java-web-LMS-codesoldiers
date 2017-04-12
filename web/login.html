@@ -2,11 +2,17 @@
 <head>
     <title>Home</title>
     <style>
+        @import "backgroundVid.css";
         @import "style.css";
         @import "login.css";
     </style>
 </head>
 <body>
+<video  id="bgvid" playsinline autoplay muted loop>
+    <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+    <source src="images/moytains%20(loop).mp4" type="video/webm">
+    <source src="images/moytains%20(loop).mp4" type="video/mp4">
+</video>
 <nav id="navbar">
     <h2 class="indent-30" id="menu_title">Menu</h2>
     <div id="menu">
@@ -47,6 +53,10 @@
         </div>
     </div>
 </section>
+<div id="videoloop">
+
+</div>
+
 
 </body>
 </html>

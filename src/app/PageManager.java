@@ -4,6 +4,7 @@ import app.pages.AssignmentPage;
 import app.pages.Page;
 import app.pages.TextPage;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,7 +39,11 @@ public class PageManager {
         return false;
     }
 
-    public void reorderPages() {
-
+    public void reorderPages(LinkedList<Integer> orderList) {
+        List<Page> temp = new ArrayList<>(pages.size());
+        for (int i = 0; i < pages.size(); i++) {
+            temp.add(orderList.get(i), pages.get(i));
+        }
+        System.out.println(temp);
     }
 }

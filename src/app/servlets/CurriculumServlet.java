@@ -3,6 +3,7 @@ package app.servlets;
 import app.PageManager;
 import app.User;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.lang.reflect.Type;
+import java.util.*;
 
 public class CurriculumServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +39,7 @@ public class CurriculumServlet extends HttpServlet {
                 addAssignmentPage(pageManager, parameterMap);
                 break;
             case "reorder":
-                System.out.println(parameterMap.get("json")[0]);
+                // System.out.println(parameterMap.get("json")[0]);
                 reorderPages(pageManager, parameterMap);
                 error = 200;
                 break;
@@ -112,10 +113,14 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     private int reorderPages(PageManager pageManager, Map<String, String[]> parameterMap) {
+        Type type = new TypeToken<LinkedList<Integer>>(){}.getType();
         Gson gson = new Gson();
+
         String json = parameterMap.get("json")[0];
-        LinkedHashMap lhm = gson.fromJson(json, LinkedHashMap.class);
-        /*System.out.println(lhm.toString());*/
+
+        LinkedList<Integer> orderList = gson.fromJson(json, type);
+        pageManager.reorderPages(orderList);
+        System.out.println(orderList.toString());
         return -1;
     }
 

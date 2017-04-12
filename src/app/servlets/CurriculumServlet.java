@@ -1,6 +1,7 @@
 package app.servlets;
 
 import app.PageManager;
+import app.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -116,6 +117,7 @@ public class CurriculumServlet extends HttpServlet {
         Gson gson = new Gson();
 
         String json = parameterMap.get("json")[0];
+
         LinkedList<Integer> orderList = gson.fromJson(json, type);
         pageManager.reorderPages(orderList);
         System.out.println(orderList.toString());
@@ -123,12 +125,6 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        String asd = request.getParameter("posts");
-        //System.out.print(asd);
-        out.print(asd);
-        PageManager pageManager = PageManager.getInstance();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("curriculum.html");
         requestDispatcher.forward(request, response);
     }

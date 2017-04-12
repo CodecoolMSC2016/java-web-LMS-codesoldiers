@@ -31,6 +31,11 @@
         <servlet-name>curriculumServlet</servlet-name>
         <servlet-class>app.servlets.CurriculumServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loginStatusServlet</servlet-name>
+        <servlet-class>app.servlets.LoginStatusServlet</servlet-class>
+    </servlet>
+
 
     <servlet-mapping>
         <servlet-name>indexServlet</servlet-name>
@@ -59,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>curriculumServlet</servlet-name>
         <url-pattern>/curriculum</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginStatusServlet</servlet-name>
+        <url-pattern>/loginstatus</url-pattern>
     </servlet-mapping>
 
 </web-app>

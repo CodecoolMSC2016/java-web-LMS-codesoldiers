@@ -120,16 +120,6 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map map = request.getParameterMap();
-        System.out.println(map);
-        boolean isGetRole = true;
-        if(isGetRole) {
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(((User)(request.getSession()).getAttribute("user")).getRole());
-        }
-        System.out.println(((User)(request.getSession()).getAttribute("user")).getRole());
-        PageManager pageManager = PageManager.getInstance();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("curriculum.html");
         requestDispatcher.forward(request, response);
     }

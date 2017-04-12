@@ -5,7 +5,6 @@ import app.PageWriter;
 import app.Pages;
 import app.User;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,7 @@ public class UserlistServlet extends HttpServlet {
         out.print("<section id='content'>");
         try {
             CSVRW db = new CSVRW("userdatabase.csv");
-            List<User> userdb = db.readCSVDatabase();
+            List<User> userdb = db.readUserDatabase();
             for (User cUser : userdb) {
                 if (user.getRole().equals("mentor") || cUser.getRole().equals("student")) {
                     String cUserRole = cUser.getRole();

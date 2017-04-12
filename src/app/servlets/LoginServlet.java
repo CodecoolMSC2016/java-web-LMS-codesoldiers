@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoginServlet extends HttpServlet {
@@ -44,7 +43,7 @@ public class LoginServlet extends HttpServlet {
     public User logIn(String userlogin, String userPassword) {
         try {
             CSVRW db = new CSVRW("userdatabase.csv");
-            List<User> userdb = db.readCSVDatabase();
+            List<User> userdb = db.readUserDatabase();
             for (User user : userdb) {
                 if (user.getEmail().equals(userlogin) && user.getPassword().equals(userPassword)) {
                     return user;

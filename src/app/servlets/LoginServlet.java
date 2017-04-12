@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoginServlet extends HttpServlet {
@@ -29,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         User logged = logIn(user, pass);
         if (logged != null) {
             session.setAttribute("user", logged);
-            response.sendRedirect("welcome");
+            response.sendRedirect("curriculum");
         } else {
             out.println("<p style='margin-left: 250'>Username or password incorrect</p>");
             login.include(request, response);
@@ -43,8 +42,8 @@ public class LoginServlet extends HttpServlet {
 
     public User logIn(String userlogin, String userPassword) {
         try {
-            CSVRW db = new CSVRW();
-            List<User> userdb = db.readCSVDatabase();
+            CSVRW db = new CSVRW("userdatabase.csv");
+            List<User> userdb = db.readUserDatabase();
             for (User user : userdb) {
                 if (user.getEmail().equals(userlogin) && user.getPassword().equals(userPassword)) {
                     return user;

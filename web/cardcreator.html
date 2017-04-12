@@ -1,0 +1,95 @@
+<html>
+<head>
+    <title>Home</title>
+    <style>
+        @import "style.css";
+        @import "login.css";
+        @import "backgroundVid.css";
+        textarea{
+            background: cyan;
+            opacity: 0.6;
+            overflow:hidden;
+            padding:10px;
+            margin: 50px auto;
+            display:block;
+            border-radius:10px;
+            border-color: #EEEEEE;
+            border-style: solid;
+            border-width: 6px;
+            color: black;
+            resize: none;
+            width: 500px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .titletextarea {
+            background-color: #64b3f4;
+        }
+
+        .assignmenttextarea {
+            background: #c2e59c;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #64b3f4, #c2e59c);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to bottom, #64b3f4, #c2e59c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            opacity: 0.95;
+        }
+
+        video{filter: blur(25px);  }
+    </style>
+</head>
+<body>
+<video  id="bgvid" playsinline autoplay muted loop>
+    <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+    <source src="images/moytains%20(loop).mp4" type="video/webm">
+    <source src="images/moytains%20(loop).mp4" type="video/mp4">
+</video>
+<nav id="navbar">
+    <h2 class="indent-30" id="menu_title">Menu</h2>
+    <div id="menu">
+        <a href=""><h3 class="indent-20 menu_item selected_menu_item">Register</h3></a>
+    </div>
+    <div class="indent-20" id="company_name">
+        <h5>created by</h5>
+        <h4>CodeSoldiers</h4>
+        <h5>- 2017 -</h5>
+    </div>
+</nav>
+
+<section id="content">
+    <div class="center">
+        <form class="inside" action="/curriculum" method="post">
+            <textarea class="titletextarea" rows='3' placeholder='Title'></textarea>
+            <script>var textarea = document.querySelector('textarea');
+            textarea.addEventListener('keydown', autosize);
+            function autosize(){
+                var el = this;
+                setTimeout(function(){
+                    el.style.cssText = 'height:auto; padding:0';
+                    // for box-sizing other than "content-box" use:
+                    // el.style.cssText = '-moz-box-sizing:content-box';
+                    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+                },0);
+
+            }</script>
+
+            <br> <br>
+            <textarea class="assignmenttextarea" rows='30' placeholder='Assignment text'></textarea>
+            <script>var textarea = document.querySelector('textarea');
+
+            textarea.addEventListener('keydown', autosize);
+            function autosize(){
+                var el = this;
+                setTimeout(function(){
+                    el.style.cssText = 'height:auto; padding:0';
+                    // for box-sizing other than "content-box" use:
+                    // el.style.cssText = '-moz-box-sizing:content-box';
+                    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+                },0);
+            }</script>
+            <input class="lbutton" type="submit" value="Add Assignment">
+        </form>
+    </div>
+</section>
+
+</body>
+</html>

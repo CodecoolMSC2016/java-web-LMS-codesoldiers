@@ -33,7 +33,7 @@ public class DataManager {
     }
 
     public void setUserDatabase(CSVRW csvrw) {
-        this.userDatabase = csvrw.readCSVDatabase();
+        this.userDatabase = csvrw.readUserDatabase();
 
     }
 }

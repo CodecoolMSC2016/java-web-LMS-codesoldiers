@@ -21,7 +21,7 @@ public class RegisterServlet extends HttpServlet {
                     request.getParameter("role"),
                     request.getParameter("pass"));
         }
-        response.sendRedirect("/login");
+        response.sendRedirect("login");
     }
 
     private void register(String user, String email, String role, String password) {

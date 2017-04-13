@@ -28,7 +28,7 @@
 <section id="content">
     <div class="center">
         <div class="horizontal">
-            <form class="inside left" action="/register" method="post">
+            <form class="inside left" action="register" method="post">
                 <h2>Register</h2>
                 <input class="linput" type="text" name="user" placeholder="Name">
                 <br>
@@ -36,13 +36,13 @@
                 <br>
                 <input class="linput" type="password" name="pass" placeholder="Password">
                 <br>
-                <input type="radio" name="role" value="student">Student</input>
+                <input type="radio" name="role" value="student" checked>Student</input>
                 <input type="radio" name="role" value="mentor">Mentor</input>
                 <br> <br>
                 <input class="lbutton" type="submit" value="Register">
             </form>
 
-            <form class="inside left sideleft" action="/login" method="post">
+            <form class="inside left sideleft" action="login" method="post">
                 <h2>Login</h2>
                 <input class="linput" type="email" name="email" placeholder="Email address">
                 <br>

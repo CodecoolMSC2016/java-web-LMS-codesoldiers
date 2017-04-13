@@ -57,7 +57,7 @@
 
 <section id="content">
     <div class="center">
-        <form class="inside" action="/curriculum" method="post">
+        <form id="jpshow" class="inside" method="post">
             <textarea class="titletextarea" rows='3' placeholder='Title'></textarea>
             <script>var textarea = document.querySelector('textarea');
             textarea.addEventListener('keydown', autosize);
@@ -86,7 +86,10 @@
                     el.style.cssText = 'height:' + el.scrollHeight + 'px';
                 },0);
             }</script>
-            <input class="lbutton" type="submit" value="Add Assignment">
+            <p align="center">
+            <a href="#" onclick="window.open('images/jp.gif', 'JP', 'width=620, height=400')">
+                Add Assignment
+            </a></p>
         </form>
     </div>
 </section>

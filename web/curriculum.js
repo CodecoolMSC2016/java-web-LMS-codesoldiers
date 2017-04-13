@@ -1,7 +1,7 @@
 var posts = [];
 
 $(document).ready(function () {
-    $.get('/loginstatus', function (data) {
+    $.get('loginstatus', function (data) {
         console.log(data);
         if (data === "mentor") {
             $('#sortable').sortable({

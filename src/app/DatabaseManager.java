@@ -23,6 +23,7 @@ public class DatabaseManager {
 
     private DatabaseManager() {
         try {
+            userList = new ArrayList<>();
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Aksis", "root", "");
             statement = connection.createStatement();
         } catch (Exception e) {
@@ -54,24 +55,19 @@ public class DatabaseManager {
         }
     }
     public boolean checkPass(String email, String pass) {
-        String tempEmail;
-        String tempPass;
-        try {
-            resultSet = statement.executeQuery("SELECT * FROM Users");
-            while(resultSet.next()) {
-                tempEmail = resultSet.getString("email");
-                tempPass = resultSet.getString("pass");
-                if(tempEmail.equals(email) && tempPass.equalsIgnoreCase(pass)) {
-                    return true;
-                }
+        for(User tempUser: userList) {
+            if(tempUser.getEmail().equals(email) && tempUser.getPassword().equalsIgnoreCase(pass)) {
+                return true;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return false;
     }
+
+    public static ArrayList<User> getUserList() {
+        return userList;
+    }
+
     public void createUserList() {
-        userList = new ArrayList<>();
         try {
             resultSet = statement.executeQuery("SELECT * FROM Users");
             while(resultSet.next()) {

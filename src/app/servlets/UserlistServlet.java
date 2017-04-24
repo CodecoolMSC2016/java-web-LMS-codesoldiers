@@ -21,6 +21,8 @@ public class UserlistServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO: read from SQL
+        // TODO: write to webpage
         PageWriter pageWriter = new PageWriter();
 
         response.setContentType("text/html");

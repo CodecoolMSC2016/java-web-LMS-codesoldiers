@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 
     public User logIn(String userlogin, String userPassword) {
         try {
+            // TODO: implement SQL login
             CSVRW db = new CSVRW("userdatabase.csv");
             List<User> userdb = db.readUserDatabase();
             for (User user : userdb) {

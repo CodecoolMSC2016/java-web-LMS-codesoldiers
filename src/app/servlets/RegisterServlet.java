@@ -25,6 +25,7 @@ public class RegisterServlet extends HttpServlet {
     }
 
     private void register(String user, String email, String role, String password) {
+        // TODO: register into SQL
         CSVRW io = new CSVRW("userdatabase.csv");
         // list from readcsv
         List<User> userList = io.readUserDatabase();

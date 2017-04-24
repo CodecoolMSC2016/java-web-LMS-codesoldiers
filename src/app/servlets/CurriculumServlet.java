@@ -19,7 +19,7 @@ public class CurriculumServlet extends HttpServlet {
         PageManager pageManager = PageManager.getInstance();
         Map<String, String[]> parameterMap = request.getParameterMap();
         String method = request.getParameter("method");
-
+        // TODO: restful
         int error = 500;
         switch (method) {
             case "delete":

@@ -6,7 +6,7 @@ public class User {
     private String role;
     private String password;
 
-
+    // TODO: SHA-1 pass
     public User(String username, String emailAddress, String role, String password) {
         this.username = username;
         this.emailAddress = emailAddress;

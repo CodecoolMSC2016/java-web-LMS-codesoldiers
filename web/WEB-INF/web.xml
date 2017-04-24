@@ -16,10 +16,6 @@
         <servlet-class>app.servlets.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>welcomeServlet</servlet-name>
-        <servlet-class>app.servlets.WelcomeServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>userlistServlet</servlet-name>
         <servlet-class>app.servlets.UserlistServlet</servlet-class>
     </servlet>
@@ -48,10 +44,6 @@
     <servlet-mapping>
         <servlet-name>registerServlet</servlet-name>
         <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>welcomeServlet</servlet-name>
-        <url-pattern>/welcome</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>userlistServlet</servlet-name>

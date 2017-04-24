@@ -7,10 +7,19 @@ public class Test {
     public static void main(String[] args) {
         DatabaseManager dbm = DatabaseManager.getInstance();
         //dbm.printUsers();
-        dbm.addNewUser("David1", "d@dc.hu", "mentor", "1234");
-        dbm.printUsers();
-        System.out.println(dbm.loginUser("d@dc.hu", dbm.sha1("1234")));
-        System.out.println(dbm.loginUser("d@dc.hu", dbm.sha1("12345")));
-        System.out.println(dbm.loginUser("d@df.hu", dbm.sha1("1234")));
+        User user1 = new User("David2", "d@dc.hu", "mentor", dbm.sha1("1234"));
+        User user2 = new User("David2", "d@hh.hu", "mentor", dbm.sha1("aBcd"));
+        User user3 = new User("David3", "d@hhc.hu", "mentor", dbm.sha1("abcd"));
+        dbm.addNewUser(user1);
+        dbm.addNewUser(user2);
+        dbm.addNewUser(user3);
+        //dbm.printUsers();
+        System.out.println(dbm.checkPass("d@dc.hu", dbm.sha1("1234"))); //true
+        System.out.println(dbm.checkPass("d@dc.hu", dbm.sha1("12345"))); //false
+        System.out.println(dbm.checkPass("d@df.hu", dbm.sha1("1234"))); //false
+        System.out.println(dbm.checkPass("d@hh.hu", dbm.sha1("aBCd"))); //false
+        System.out.println(dbm.checkPass("d@hh.hu", dbm.sha1("aBcd"))); //true
+        System.out.println(dbm.checkPass("d@hhc.hu", dbm.sha1("abcd"))); //true
+        System.out.println(dbm.checkPass("d@hhc.hu", dbm.sha1("abcD"))); //false
     }
 }

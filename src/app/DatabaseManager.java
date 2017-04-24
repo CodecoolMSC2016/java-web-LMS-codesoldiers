@@ -8,13 +8,13 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 
 public class DatabaseManager {
     Connection connection;
     Statement statement;
     ResultSet resultSet;
+    private static ArrayList<User> userList;
     private static DatabaseManager ourInstance = new DatabaseManager();
 
     public static DatabaseManager getInstance() {
@@ -23,7 +23,7 @@ public class DatabaseManager {
 
     private DatabaseManager() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://192.168.150.86:3306/Aksis", "CodeSoldiers", "AksiS");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Aksis", "root", "");
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,17 +43,17 @@ public class DatabaseManager {
             e.printStackTrace();
         }
     }
-    public void addNewUser(String username, String email, String role, String pass) {
+    public void addNewUser(User user) {
         String newUser = String.format("INSERT INTO Users(username, email, role, pass) " +
-                "VALUES(\"%s\", \"%s\", \"%s\", sha1(\"%s\"));", username, email, role, pass);
-        System.out.println(newUser);
+                "VALUES(\"%s\", \"%s\", \"%s\", sha1(\"%s\"));", user.getUsername(), user.getEmail(),
+                user.getRole(), user.getPassword());
         try {
             statement.executeUpdate(newUser);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public boolean loginUser(String email, String pass) {
+    public boolean checkPass(String email, String pass) {
         String tempEmail;
         String tempPass;
         try {
@@ -69,6 +69,18 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return false;
+    }
+    public void createUserList() {
+        userList = new ArrayList<>();
+        try {
+            resultSet = statement.executeQuery("SELECT * FROM Users");
+            while(resultSet.next()) {
+                userList.add(new User(resultSet.getString("username"), resultSet.getString("email"),
+                        resultSet.getString("role"), resultSet.getString("pass")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public String sha1(String input) {

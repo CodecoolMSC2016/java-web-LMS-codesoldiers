@@ -46,7 +46,7 @@ public class DatabaseManager {
     }
     public void addNewUser(User user) {
         String newUser = String.format("INSERT INTO Users(username, email, role, pass) " +
-                "VALUES(\"%s\", \"%s\", \"%s\", sha1(\"%s\"));", user.getUsername(), user.getEmail(),
+                "VALUES(\"%s\", \"%s\", \"%s\", \"%s\");", user.getUsername(), user.getEmail(),
                 user.getRole(), user.getPassword());
         try {
             statement.executeUpdate(newUser);
@@ -59,8 +59,7 @@ public class DatabaseManager {
             if(tempUser.getEmail().equals(email) && tempUser.getPassword().equalsIgnoreCase(pass)) {
                 return true;
             }
-        }
-        return false;
+        } return false;
     }
 
     public static ArrayList<User> getUserList() {

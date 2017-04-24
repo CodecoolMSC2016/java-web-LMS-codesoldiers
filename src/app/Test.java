@@ -9,12 +9,12 @@ public class Test {
     public static void main(String[] args) {
         DatabaseManager dbm = DatabaseManager.getInstance();
         //dbm.printUsers();
-        //User user1 = new User("David1", "d@dc.hu", "mentor", dbm.sha1("1234"));
-        //User user2 = new User("David2", "d@hh.hu", "mentor", dbm.sha1("aBcd"));
-        //User user3 = new User("David3", "d@hhc.hu", "mentor", dbm.sha1("abcd"));
-        //dbm.addNewUser(user1);
-        //dbm.addNewUser(user2);
-        //dbm.addNewUser(user3);
+        User user1 = new User("David1", "d@dc.hu", "mentor", dbm.sha1("1234"));
+        User user2 = new User("David2", "d@hh.hu", "mentor", dbm.sha1("aBcd"));
+        User user3 = new User("David3", "d@hhc.hu", "mentor", dbm.sha1("abcd"));
+        dbm.addNewUser(user1);
+        dbm.addNewUser(user2);
+        dbm.addNewUser(user3);
         //dbm.printUsers();
         dbm.createUserList();
         ArrayList<User> userList = dbm.getUserList();

@@ -1,15 +1,11 @@
 package app.servlets;
 
-import app.CSVRW;
-import app.User;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +22,7 @@ public class RegisterServlet extends HttpServlet {
 
     private void register(String user, String email, String role, String password) {
         // TODO: register into SQL
-        CSVRW io = new CSVRW("userdatabase.csv");
+        /*CSVRW io = new CSVRW("userdatabase.csv");
         // list from readcsv
         List<User> userList = io.readUserDatabase();
         System.out.println(password);
@@ -38,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
         // saveto csv
         io.saveToCSV(userList);
         System.out.println(userList.size());
-        System.out.println("csv saved");
+        System.out.println("csv saved");*/
     }
 
     private boolean checkInputs() {

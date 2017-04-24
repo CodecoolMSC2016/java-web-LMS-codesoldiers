@@ -1,8 +1,5 @@
 package app;
 
-/**
- * Created by david_szilagyi on 2017.04.24..
- */
 import java.sql.*;
 public class DatabaseManager {
     Connection connection;

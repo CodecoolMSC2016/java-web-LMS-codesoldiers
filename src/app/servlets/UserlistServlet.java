@@ -1,8 +1,5 @@
 package app.servlets;
 
-import app.CSVRW;
-import app.PageWriter;
-import app.Pages;
 import app.User;
 
 import javax.servlet.ServletException;
@@ -12,7 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class UserlistServlet extends HttpServlet {
@@ -23,7 +23,7 @@ public class UserlistServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO: read from SQL
         // TODO: write to webpage
-        PageWriter pageWriter = new PageWriter();
+        /*PageWriter pageWriter = new PageWriter();
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -46,7 +46,31 @@ public class UserlistServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        out.print("</section>");
+        out.print("</section>");*/
+
+        response.setContentType("text/html");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.150.86:3306/Aksis", "CodeSoldiers", "AksiS");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Users");
+            while(resultSet.next()) {
+                System.out.printf("id: %s%n", resultSet.getString("id"));
+                System.out.printf("Username: %s%n", resultSet.getString("username"));
+                System.out.printf("Email: %s%n", resultSet.getString("email"));
+                System.out.printf("Role: %s%n", resultSet.getString("role"));
+                System.out.printf("Password: %s%n", resultSet.getString("pass"));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        PrintWriter out = response.getWriter();
+        out.print(session.getAttribute("user"));
+
 
     }
 }

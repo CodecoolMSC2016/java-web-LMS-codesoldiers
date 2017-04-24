@@ -21,34 +21,10 @@ public class UserlistServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("USERLIST GET");
         // TODO: read from SQL
         // TODO: write to webpage
-        /*PageWriter pageWriter = new PageWriter();
 
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        out.print(session.getAttribute("user"));
-        out.print(pageWriter.getHTMLHead("Users"));
-        out.print(pageWriter.getHTMLSidebar(Pages.USERS ,user.getUsername()));
-        out.print("<section id='content'>");
-        try {
-            CSVRW db = new CSVRW("userdatabase.csv");
-            List<User> userdb = db.readUserDatabase();
-            for (User cUser : userdb) {
-                if (user.getRole().equals("mentor") || cUser.getRole().equals("student")) {
-                    String cUserRole = cUser.getRole();
-                    String cUserEmail = cUser.getEmail();
-                    out.print(pageWriter.getCard(cUserRole, cUserEmail, ""));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        out.print("</section>");*/
-
-        response.setContentType("text/html");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
@@ -67,10 +43,5 @@ public class UserlistServlet extends HttpServlet {
         catch (Exception e) {
             e.printStackTrace();
         }
-
-        PrintWriter out = response.getWriter();
-        out.print(session.getAttribute("user"));
-
-
     }
 }

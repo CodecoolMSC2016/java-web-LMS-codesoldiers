@@ -46,4 +46,21 @@ public class DatabaseManager {
             e.printStackTrace();
         }
     }
+    public boolean loginUser(String email, String pass) {
+        String tempEmail;
+        String tempPass;
+        try {
+            resultSet = statement.executeQuery("SELECT * FROM Users");
+            while(resultSet.next()) {
+                tempEmail = resultSet.getString("email");
+                tempPass = resultSet.getString("pass");
+                if(tempEmail.equals(email) && tempPass.equals(pass)) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

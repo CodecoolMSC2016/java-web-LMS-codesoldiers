@@ -18,6 +18,12 @@ public class DatabaseManager {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://192.168.150.86:3306/Aksis", "CodeSoldiers", "AksiS");
             statement = connection.createStatement();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void printUsers() {
+        try {
             resultSet = statement.executeQuery("SELECT * FROM Users");
             while(resultSet.next()) {
                 System.out.printf("id: %s%n", resultSet.getString("id"));
@@ -26,7 +32,17 @@ public class DatabaseManager {
                 System.out.printf("Role: %s%n", resultSet.getString("role"));
                 System.out.printf("Password: %s%n", resultSet.getString("pass"));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void addNewUser(String username, String email, String role, String pass) {
+        String newUser = String.format("INSERT INTO Users(username, email, role, pass) " +
+                "VALUES(\"%s\", \"%s\", \"%s\", sha1(\"%s\"));", username, email, role, pass);
+        System.out.println(newUser);
+        try {
+            statement.executeUpdate(newUser);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

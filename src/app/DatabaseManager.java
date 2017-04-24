@@ -3,7 +3,14 @@ package app;
 /**
  * Created by david_szilagyi on 2017.04.24..
  */
+import javax.xml.bind.DatatypeConverter;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class DatabaseManager {
     Connection connection;
     Statement statement;
@@ -54,7 +61,7 @@ public class DatabaseManager {
             while(resultSet.next()) {
                 tempEmail = resultSet.getString("email");
                 tempPass = resultSet.getString("pass");
-                if(tempEmail.equals(email) && tempPass.equals(pass)) {
+                if(tempEmail.equals(email) && tempPass.equalsIgnoreCase(pass)) {
                     return true;
                 }
             }
@@ -62,5 +69,17 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public String sha1(String input) {
+        String sha1 = null;
+        try {
+            MessageDigest msdDigest = MessageDigest.getInstance("SHA-1");
+            msdDigest.update(input.getBytes("UTF-8"), 0, input.length());
+            sha1 = DatatypeConverter.printHexBinary(msdDigest.digest());
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return sha1;
     }
 }

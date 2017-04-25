@@ -17,27 +17,30 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        RequestDispatcher login = request.getRequestDispatcher("login.jsp");
+        if (dbm.checkInputs(request.getParameter("pass"))) {
+            String user = request.getParameter("email");
+            String pass = request.getParameter("pass");
 
-        String user = request.getParameter("email");
-        String pass = request.getParameter("pass");
+            HttpSession session = request.getSession();
 
-        RequestDispatcher login = request.getRequestDispatcher("login.html");
-        HttpSession session = request.getSession();
-
-        session.removeAttribute("user");
-        User logged = logIn(user, pass);
-        if (logged != null) {
-            session.setAttribute("user", logged);
-            response.sendRedirect("curriculum");
+            session.removeAttribute("user");
+            User logged = logIn(user, pass);
+            if (logged != null) {
+                session.setAttribute("user", logged);
+                response.sendRedirect("curriculum");
+            } else {
+                request.setAttribute("messageFromServlet", "Username or password incorrect");
+                login.forward(request, response);
+            }
         } else {
-            out.println("<p style='margin-left: 250'>Username or password incorrect</p>");
-            login.include(request, response);
+            request.setAttribute("messageFromServlet", "Only alphabetical and digital chars allowed!");
+            login.forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher login = request.getRequestDispatcher("login.html");
+        RequestDispatcher login = request.getRequestDispatcher("login.jsp");
         login.forward(request, response);
     }
 

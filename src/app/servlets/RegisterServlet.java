@@ -2,6 +2,7 @@ package app.servlets;
 
 import app.DatabaseManager;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,24 +15,19 @@ public class RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        if (checkInputs(request.getParameter("pass"))) {
+        RequestDispatcher login = request.getRequestDispatcher("login.jsp");
+        if (dbm.checkInputs(request.getParameter("pass"))) {
             dbm.addNewUser(request.getParameter("user"),
                     request.getParameter("email"),
                     request.getParameter("role"),
                     request.getParameter("pass"));
+            request.setAttribute("messageFromServlet", "User registered successfully!");
+            login.forward(request, response);
+        } else {
+            request.setAttribute("messageFromServlet", "Only alphabetical and digital chars allowed!");
+            login.forward(request, response);
         }
-        response.sendRedirect("login");
-        PrintWriter out = response.getWriter();
-        out.println("<p style='margin-left: 250'>Successful registration!</p>");
-    }
 
-    public boolean checkInputs(String string) {
-        for (int i = 0; i < string.length(); i++) {
-            if (!Character.isLetterOrDigit(string.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

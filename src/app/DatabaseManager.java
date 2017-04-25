@@ -23,8 +23,8 @@ public class DatabaseManager {
     private DatabaseManager() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Aksis", "root", "");
-            connection = DriverManager.getConnection("jdbc:mysql://192.168.150.86:3306/Aksis", "CodeSoldiers", "AksiS");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Aksis", "root", "");
+//            connection = DriverManager.getConnection("jdbc:mysql://192.168.150.86:3306/Aksis", "CodeSoldiers", "AksiS");
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,11 +57,27 @@ public class DatabaseManager {
         }
     }
 
+    public void changeAttr(User user) {
+        String check = String.format("SELECT * FROM Users WHERE email=\"%s\";", user.getEmail());
+        try {
+            resultSet = statement.executeQuery(check);
+            if (resultSet.next()) {
+                String update = String.format("UPDATE Users SET username=\"%s\",role=\"%s\",pass=\"%s\" WHERE email=\"%s\";",
+                        user.getUsername(), user.getRole(), user.getPassword(), user.getEmail());
+                statement.executeUpdate(update);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public User loginUser(String currEmail, String currPass) {
         String check = String.format("SELECT * FROM Users WHERE email=\"%s\" AND pass=\"%s\";", currEmail, sha1(currPass));
         try {
             resultSet = statement.executeQuery(check);
-            if(!resultSet.next()) { return null; }
+            if (!resultSet.next()) {
+                return null;
+            }
             User loggedUser = new User(resultSet.getString("username"), resultSet.getString("email"),
                     resultSet.getString("role"), resultSet.getString("pass"));
             return loggedUser;

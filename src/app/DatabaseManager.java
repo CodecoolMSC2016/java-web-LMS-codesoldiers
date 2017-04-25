@@ -82,4 +82,13 @@ public class DatabaseManager {
         }
         return sha1;
     }
+
+    public boolean checkInputs(String string) {
+        for (int i = 0; i < string.length(); i++) {
+            if (!Character.isLetterOrDigit(string.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -45,35 +45,6 @@
 </nav>
 
 <section id="content">
-    <!--ul id="sortable">
-        <li class="card" data-post-id="0">Post 1
-            <hr></hr>
-        </li>
-        <li class="card" data-post-id="1">Post 2
-            <hr></hr>
-        </li>
-        <li class="card" data-post-id="2">Post 3
-            <hr></hr>
-        </li>
-        <li class="card" data-post-id="3">Post 4
-            <hr></hr>
-        </li>
-        <li class="card" data-post-id="4">Post 5
-            <hr></hr>
-        </li>
-        <li class="card" data-post-id="5">Post 6
-            <hr></hr>
-        </li>
-        <li class="card" data-post-id="6">Post 7
-            <hr></hr>
-        </li>
-    </ul>
-    <script type="text/javascript"></script>
-    <script type="text/javascript" src="curriculum.js">
-    </script>
-    <p id="console"></p-->
-
-
     <ul>
     <c:forEach items="${userlist}" var="item">
             <li class="card">

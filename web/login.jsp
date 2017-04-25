@@ -1,3 +1,12 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: david_szilagyi
+  Date: 2017.04.25.
+  Time: 15:04
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Home</title>
@@ -6,6 +15,15 @@
         @import "style.css";
         @import "login.css";
     </style>
+    <c:if test="${messageFromServlet != null}">
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <% String message = (String)request.getAttribute("messageFromServlet");%>
+            <script>var msg = "<%=message%>";
+            alert(msg);
+            </script>
+        </div>
+    </c:if>
 </head>
 <body>
 <video  id="bgvid" playsinline autoplay muted loop>

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Users</title>
     <style>
-        @import "curriculum.css";
+        @import "userlist.css";
         @import "backgroundVid.css";
     </style>
     <script
@@ -45,15 +45,24 @@
 </nav>
 
 <section id="content">
-    <ul>
-    <c:forEach items="${userlist}" var="item">
-            <li class="card">
-                ${item[0]}
-                <hr>
-                ${item[1]}, ${item[2]}
-            </li>
-    </c:forEach>
-    </ul>
+    <div id="userlist">
+        <table>
+        <c:forEach items="${userlist}" var="item">
+            <tr>
+                <td>
+                    ${item[0]}
+                </td>
+                <td>
+                    ${item[1]}
+                </td>
+                <td>
+                    ${item[2]}
+                </td>
+                <br><br>
+            </tr>
+        </c:forEach>
+        </table>
+    </div>
 </section>
 </body>
 </html>

@@ -63,7 +63,8 @@ public class CurriculumServlet extends HttpServlet {
         Map<String, String[]> parameterMap = request.getParameterMap();
 
         int error = 500;
-        switch (request.getParameter("method")) {
+        String method = request.getParameter("method");
+        switch (method) {
             case "addTextPage":
                 // title, content
                 addTextPage(pageManager, parameterMap);

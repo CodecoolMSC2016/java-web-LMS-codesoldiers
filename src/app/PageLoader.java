@@ -75,4 +75,37 @@ public class PageLoader {
         return false;
     }
 
+    public boolean addAssignmentPage(AssignmentPage page) {
+        try {
+            String countQ = "SELECT COUNT(*) FROM Pages";
+            ResultSet countSet = statement.executeQuery(countQ);
+            countSet.next();
+            int count = countSet.getInt(1);
+            String q = "INSERT INTO Pages(ord, published, title, pagetype, question, maxScore) ";
+            q += String.format("VALUES(%d, 0, \"%s\", 0, \"%s\", %d);",
+                    count, page.getTitle(), page.getQuestion(), page.getMaxScore());
+            statement.executeUpdate(q);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean addTextPage(TextPage page) {
+        try {
+            String countQ = "SELECT COUNT(*) FROM Pages";
+            ResultSet countSet = statement.executeQuery(countQ);
+            countSet.next();
+            int count = countSet.getInt(1);
+            String q = "INSERT INTO Pages(ord, published, title, pagetype, content) ";
+            q += String.format("VALUES(%d, 0, \"%s\", 1, \"%s\");",
+                    count, page.getTitle(), page.getContent());
+            statement.executeUpdate(q);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

@@ -9,4 +9,12 @@ public class AssignmentPage extends Page {
         this.question = question;
         this.maxScore = maxScore;
     }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public int getMaxScore() {
+        return maxScore;
+    }
 }

@@ -58,11 +58,13 @@ public class DatabaseManager {
     }
 
     public User loginUser(String currEmail, String currPass) {
-        String check = String.format("SELECT * FROM Users WHERE email = %s AND pass = %s", currEmail, currPass);
+        String check = String.format("SELECT * FROM Users WHERE email=\"%s\" AND pass=\"%s\";", currEmail, sha1(currPass));
         try {
             resultSet = statement.executeQuery(check);
-            return new User(resultSet.getString("username"), resultSet.getString("email"),
+            if(!resultSet.next()) { return null; }
+            User loggedUser = new User(resultSet.getString("username"), resultSet.getString("email"),
                     resultSet.getString("role"), resultSet.getString("pass"));
+            return loggedUser;
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String user = request.getParameter("email");
-        String pass = dbm.sha1(request.getParameter("pass"));
+        String pass = request.getParameter("pass");
 
         RequestDispatcher login = request.getRequestDispatcher("login.html");
         HttpSession session = request.getSession();

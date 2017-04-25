@@ -44,6 +44,10 @@ public class LoginServlet extends HttpServlet {
 
     public User logIn(String userlogin, String userPassword) {
             // TODO: implement SQL login
-            return new User("TamasMacska", "tomcat@tomcat.com", "student", "asd");
+            //Simulated login(non-real user):
+            //student:
+            //return new User("TamasMacska", "tomcat@tomcat.com", "student", "asd");
+            //mentor:
+            return new User("TamasMacska", "tomcat@tomcat.com", "mentor", "asd");
     }
 }

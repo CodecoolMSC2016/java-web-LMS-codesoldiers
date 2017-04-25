@@ -1,13 +1,8 @@
 package app;
 
-import app.pages.AssignmentPage;
 import app.pages.Page;
-import app.pages.TextPage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class PageManager {
     private static PageManager ourInstance = new PageManager();
@@ -15,11 +10,8 @@ public class PageManager {
 
     private PageManager() {
         pages = new LinkedList<>();
-        Page.lastId = -1;
-        addTextPage("textpage1", "textcontent1");
-        addTextPage("textpage2", "textcontent2");
-        addTextPage("textpage3", "textcontent3");
-        addTextPage("textpage4", "textcontent4");
+        PageLoader loader = PageLoader.getInstance();
+        pages = loader.loadPages();
     }
 
     public static PageManager getInstance() {
@@ -31,11 +23,13 @@ public class PageManager {
     }
 
     public boolean addTextPage(String title, String content) {
-        return pages.add(new TextPage(title, content));
+        // return pages.add(new TextPage(id, title, content));
+        return true;
     }
 
     public boolean addAssignmentPage(String title, String question, int maxScore) {
-        return pages.add(new AssignmentPage(title, question, maxScore));
+        // return pages.add(new AssignmentPage(id, title, question, maxScore));
+        return true;
     }
 
     public boolean removePageById(int id) {
@@ -57,13 +51,10 @@ public class PageManager {
         return null;
     }
 
-    public boolean reorderPages(LinkedList<Integer> orderList) {
-        Page[] pageArr = new Page[pages.size()];
-        for (int i = 0; i < pages.size(); i++) {
-            int insertIndex = orderList.get(i);
-            pageArr[insertIndex] = getById(pages, i);
-        }
-        pages = Arrays.asList(pageArr);
+    public boolean reorderPages(Map<Integer, Integer> orderList) {
+        PageLoader loader = PageLoader.getInstance();
+        loader.updateOrder(orderList);
+        pages = loader.loadPages();
         return true;
     }
 }

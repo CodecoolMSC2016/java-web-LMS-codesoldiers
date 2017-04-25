@@ -1,15 +1,13 @@
 package app.pages;
 
 public abstract class Page {
-    public static long lastId;
     private long id;
     private boolean published;
     private String title;
 
-    protected Page(String title) {
-        id = lastId + 1;
-        lastId += 1;
-        published = false;
+    protected Page(int id, boolean published, String title) {
+        this.id = id;
+        this.published = published;
         this.title = title;
     }
 

@@ -125,12 +125,18 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     private boolean reorderPages(PageManager pageManager, Map<String, String[]> parameterMap) {
-        Type type = new TypeToken<LinkedList<Integer>>() { }.getType();
+        Type type = new TypeToken<Map<Integer, Integer>>() {}.getType();
         Gson gson = new Gson();
 
         String json = parameterMap.get("json")[0];
 
-        LinkedList<Integer> orderList = gson.fromJson(json, type);
+        // [3, 0, 2, 1]
+        // -->
+        // 0. item on 3. place  item.id(0) on item.ord(3)
+        // 1. item on 0. place  item.id(1) on item.ord(0)
+        // 2. item on 2. place  item.id(2) on item.ord(2)
+        // 3. item on 1. place  item.id(3) on item.ord(1)
+        Map<Integer, Integer> orderList = gson.fromJson(json, type);
         return pageManager.reorderPages(orderList);
     }
 

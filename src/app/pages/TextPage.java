@@ -7,4 +7,8 @@ public class TextPage extends Page {
         super(title);
         this.content = content;
     }
+
+    public String getContent() {
+        return content;
+    }
 }

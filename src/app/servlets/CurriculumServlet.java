@@ -9,38 +9,43 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.Map;
 
 public class CurriculumServlet extends HttpServlet {
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PageManager pageManager = PageManager.getInstance();
+        Map<String, String[]> parameterMap = request.getParameterMap();
+
+        try {
+            int id = Integer.valueOf(request.getParameter("id"));
+            boolean successful = pageManager.removePageById(id);
+            if (successful) {
+                response.sendError(200);
+            }
+        } catch (Exception e) {
+            response.sendError(400);
+        }
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PageManager pageManager = PageManager.getInstance();
         Map<String, String[]> parameterMap = request.getParameterMap();
         String method = request.getParameter("method");
+        System.out.println(request.getParameter("method"));
+
         // TODO: restful
         int error = 500;
         switch (method) {
-            case "delete":
-                error = delete(pageManager, parameterMap);
-                break;
             case "modify":
                 // error = modify(parameterMap);
                 error = 501;
                 break;
-            case "addTextPage":
-                // title, content
-                addTextPage(pageManager, parameterMap);
-                break;
-            case "addAssignmentPage":
-                // title, question, maxScore
-                addAssignmentPage(pageManager, parameterMap);
-                break;
             case "reorder":
-                // System.out.println(parameterMap.get("json")[0]);
-                reorderPages(pageManager, parameterMap);
-                error = 200;
+                error = reorderPages(pageManager, parameterMap) ? 200 : 500;
                 break;
             default:
                 error = 404;
@@ -53,21 +58,29 @@ public class CurriculumServlet extends HttpServlet {
         }
     }
 
-    private int delete(PageManager pageManager, Map<String, String[]> parameterMap) {
-        // required params: id
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PageManager pageManager = PageManager.getInstance();
+        Map<String, String[]> parameterMap = request.getParameterMap();
 
-        if (parameterMap.containsKey("id")) {
-            try {
-                int id = Integer.valueOf(parameterMap.get("id")[0]);
-                boolean successful = pageManager.removePageById(id);
-                if (successful) {
-                    return 200;
-                }
-            } catch (NumberFormatException e) {
-                return 400;
-            }
+        int error = 500;
+        switch (request.getParameter("method")) {
+            case "addTextPage":
+                // title, content
+                addTextPage(pageManager, parameterMap);
+                break;
+            case "addAssignmentPage":
+                // title, question, maxScore
+                error = addAssignmentPage(pageManager, parameterMap) ? 200 : 500;
+                break;
+            default:
+                error = 404;
+                break;
         }
-        return 400;
+        if (error >= 400) {
+            response.sendError(error);
+        } else {
+            response.sendRedirect("/curriculum");
+        }
     }
 
     private int modifyPage(PageManager pageManager, Map<String, String[]> parameterMap) {
@@ -90,7 +103,7 @@ public class CurriculumServlet extends HttpServlet {
         return 400;
     }
 
-    private int addAssignmentPage(PageManager pageManager, Map<String, String[]> parameterMap) {
+    private boolean addAssignmentPage(PageManager pageManager, Map<String, String[]> parameterMap) {
         // required params: title, question, maxScore
 
         if (parameterMap.containsKey("title") &&
@@ -102,29 +115,32 @@ public class CurriculumServlet extends HttpServlet {
                 int maxScore = Integer.valueOf(parameterMap.get("maxScore")[0]);
                 if (!title.equals("") || !question.equals("")) {
                     pageManager.addAssignmentPage(title, question, maxScore);
-                    return 200;
+                    return true;
                 }
             } catch (NumberFormatException e) {
-                return 400;
+                return false;
             }
         }
-        return 400;
+        return false;
     }
 
-    private int reorderPages(PageManager pageManager, Map<String, String[]> parameterMap) {
-        Type type = new TypeToken<LinkedList<Integer>>() {}.getType();
+    private boolean reorderPages(PageManager pageManager, Map<String, String[]> parameterMap) {
+        Type type = new TypeToken<LinkedList<Integer>>() { }.getType();
         Gson gson = new Gson();
 
         String json = parameterMap.get("json")[0];
 
         LinkedList<Integer> orderList = gson.fromJson(json, type);
-        pageManager.reorderPages(orderList);
-        System.out.println(orderList.toString());
-        return -1;
+        return pageManager.reorderPages(orderList);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("curriculum.html");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("curriculum.jsp");
+        PageManager pageManager = PageManager.getInstance();
+        HttpSession session = request.getSession();
+
+        request.setAttribute("pages", pageManager.getPages().toArray());
+        request.setAttribute("user", session.getAttribute("user"));  // mentor or not
         requestDispatcher.forward(request, response);
     }
 }

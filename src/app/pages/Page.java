@@ -24,4 +24,12 @@ public abstract class Page {
     public long getId() {
         return id;
     }
+
+    public boolean isPublished() {
+        return published;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 }

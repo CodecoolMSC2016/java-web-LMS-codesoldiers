@@ -1,6 +1,6 @@
 package app.servlets;
 
-import app.CSVRW;
+import app.DatabaseManager;
 import app.User;
 
 import javax.servlet.RequestDispatcher;
@@ -11,15 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 public class LoginServlet extends HttpServlet {
+    DatabaseManager dbm = DatabaseManager.getInstance();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
         String user = request.getParameter("email");
-        String pass = request.getParameter("pass");
+        String pass = dbm.sha1(request.getParameter("pass"));
 
         RequestDispatcher login = request.getRequestDispatcher("login.html");
         HttpSession session = request.getSession();
@@ -40,19 +41,7 @@ public class LoginServlet extends HttpServlet {
         login.forward(request, response);
     }
 
-    public User logIn(String userlogin, String userPassword) {
-        try {
-            // TODO: implement SQL login
-            CSVRW db = new CSVRW("userdatabase.csv");
-            List<User> userdb = db.readUserDatabase();
-            for (User user : userdb) {
-                if (user.getEmail().equals(userlogin) && user.getPassword().equals(userPassword)) {
-                    return user;
-                }
-            }
-        } catch (Exception e) {
-            return null;
-        }
-        return null;
+    public User logIn(String userLogin, String userPassword) {
+        return dbm.loginUser(userLogin, userPassword);
     }
 }

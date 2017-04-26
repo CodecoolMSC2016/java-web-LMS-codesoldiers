@@ -1,4 +1,4 @@
-textarea, input[type=text]{
+textarea, input[type=text], input[type=password]{
     //background: cyan;
     opacity: 0.6;
     overflow:hidden;

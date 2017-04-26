@@ -1,3 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="app.User" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String user = ((User) request.getSession().getAttribute("user")).getUsername();
+    String email = ((User) request.getSession().getAttribute("user")).getEmail();
+    String role = ((User) request.getSession().getAttribute("user")).getRole();
+%>
 <html>
 <head>
     <title>Home</title>
@@ -6,6 +14,15 @@
         @import "backgroundVid.css";
         @import "card.css";
     </style>
+    <c:if test="${messageFromServlet != null}">
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <% String message = (String)request.getAttribute("messageFromServlet");%>
+            <script>var msg = "<%=message%>";
+            alert(msg);
+            </script>
+        </div>
+    </c:if>
 </head>
 <body>
 <video  id="bgvid" playsinline autoplay muted loop>
@@ -29,15 +46,12 @@
     <div class="center">
         <form id="profileform" class="inside" method="post">
             <h1 class="formtext bigtitle">Profile</h1>
-            <input type="text" class="titletextarea" name="user" placeholder="Username">
-            <input type="text" class="titletextarea" name="email" placeholder="email" disabled>
+            <input type="text" class="titletextarea" name="user" placeholder="Username" value="<%=user%>">
+            <input type="text" class="titletextarea" name="email" placeholder="<%=email%>" disabled>
             <br>
             <p class="formtext">Change password:</p>
-            <input type="text" class="titletextarea" placeholder="Current password">
-            <input type="text" class="titletextarea" placeholder="New password">
-
-            <br> <br>
-
+            <input type="password" class="titletextarea" name="currpass" placeholder="Current password">
+            <input type="password" class="titletextarea" name="newpass" placeholder="New password">
             <script>
                 var postProfile = function () {
                     var profileform = document.getElementById("profileform");
@@ -53,3 +67,4 @@
 
 </body>
 </html>
+

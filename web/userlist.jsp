@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Users</title>
     <style>
+        @import "style.css";
         @import "userlist.css";
         @import "backgroundVid.css";
     </style>
@@ -16,10 +17,6 @@
             src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
             integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
             crossorigin="anonymous"></script>
-    <style>
-        @import "style.css";
-        @import "login.css";
-    </style>
 </head>
 <body>
 <video id="bgvid" playsinline autoplay muted loop>
@@ -28,10 +25,11 @@
     <source src="images/moytains%20(loop).mp4" type="video/mp4">
 </video>
 <nav id="navbar">
-    <h2 class="indent-30" id="menu_title">Menu</h2>
+    <h1 class="indent-30" id="menu_title">Menu</h1>
     <div id="menu">
-        <a href="#"><h3 class="indent-20 menu_item selected_menu_item">Home</h3></a>
-        <a href="userlist"><h3 class="indent-20 menu_item">Users</h3></a>
+        <a href="#" class="indent-20 menu_item">Profile</a>
+        <a href="curriculum" class="indent-20 menu_item">Curriculum view</a>
+        <a href="userlist" class="indent-20 menu_item selected_menu_item">Users</a>
         <form id='logoutform' action="logout" method="get">
             <input type="submit" value="Logout"
                    name="Logout" id="logout" class="indent-20 menu_item emptybutton">
@@ -45,24 +43,34 @@
 </nav>
 
 <section id="content">
-    <div id="userlist">
-        <table>
-        <c:forEach items="${userlist}" var="item">
-            <tr>
-                <td>
-                    ${item[0]}
-                </td>
-                <td>
-                    ${item[1]}
-                </td>
-                <td>
-                    ${item[2]}
-                </td>
-                <br><br>
-            </tr>
-        </c:forEach>
-        </table>
-    </div>
+    <ul id="sortable">
+        <li class="card" data-post-id="<c:out value="${item.id}"/>">
+            <h2>
+                Users
+            </h2>
+            <hr>
+            <table>
+                <th>Username</th>
+                <th>E-mail address</th>
+                <th>Role</th>
+                <c:forEach items="${userlist}" var="item">
+                    <tr>
+                        <td>
+                                ${item[0]}
+                        </td>
+                        <td>
+                                ${item[1]}
+                        </td>
+                        <td>
+                                ${item[2]}
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </li>
+    </ul>
 </section>
+
+
 </body>
 </html>

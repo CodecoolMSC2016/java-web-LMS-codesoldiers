@@ -1,27 +1,3 @@
-li {
-    text-align: center;
-    float: left;
-    margin: 0.33em !important;
-    height: 120px !important;
-    margin: 10px -20px;
-    border: 0;
-    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
-    list-style-type: none;
-    border-radius: 5px;
-    background: linear-gradient(to top, #CFDEF3, #E0EAFC);
-    padding: 20px;
-    width: 80%;
-    height: 150px;
-    margin: 5px;
-    padding: 5px; /* fallback for old browsers */
-    background: #c2e59c; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #64b3f4, #c2e59c); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #64b3f4, #c2e59c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    opacity: 0.95;
-
-    cursor: move;
-}
-
 hr {
     height: 12px !important;
     margin: 0px 0px;

@@ -2,7 +2,7 @@ package app;
 
 public class User {
     private String username;
-    private String emailAddress;
+    private final String emailAddress;
     private String role;
     private String password;
 
@@ -34,6 +34,7 @@ public class User {
     public String getUsername() {
         return username;
     }
+
 }
 
 

@@ -1,6 +1,6 @@
 package app.servlets;
 
-import app.CSVRW;
+import app.DatabaseManager;
 import app.User;
 
 import javax.servlet.RequestDispatcher;
@@ -11,48 +11,40 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 public class LoginServlet extends HttpServlet {
+    DatabaseManager dbm = DatabaseManager.getInstance();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        RequestDispatcher login = request.getRequestDispatcher("login.jsp");
+        if (dbm.checkInputs(request.getParameter("pass"))) {
+            String user = request.getParameter("email");
+            String pass = request.getParameter("pass");
 
-        String user = request.getParameter("email");
-        String pass = request.getParameter("pass");
+            HttpSession session = request.getSession();
 
-        RequestDispatcher login = request.getRequestDispatcher("login.html");
-        HttpSession session = request.getSession();
-
-        session.removeAttribute("user");
-        User logged = logIn(user, pass);
-        if (logged != null) {
-            session.setAttribute("user", logged);
-            response.sendRedirect("curriculum");
+            session.removeAttribute("user");
+            User logged = logIn(user, pass);
+            if (logged != null) {
+                session.setAttribute("user", logged);
+                response.sendRedirect("curriculum");
+            } else {
+                request.setAttribute("messageFromServlet", "Email or password incorrect");
+                login.forward(request, response);
+            }
         } else {
-            out.println("<p style='margin-left: 250'>Username or password incorrect</p>");
-            login.include(request, response);
+            request.setAttribute("messageFromServlet", "Only letters and numbers are allowed!");
+            login.forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher login = request.getRequestDispatcher("login.html");
+        RequestDispatcher login = request.getRequestDispatcher("login.jsp");
         login.forward(request, response);
     }
 
-    public User logIn(String userlogin, String userPassword) {
-        try {
-            // TODO: implement SQL login
-            CSVRW db = new CSVRW("userdatabase.csv");
-            List<User> userdb = db.readUserDatabase();
-            for (User user : userdb) {
-                if (user.getEmail().equals(userlogin) && user.getPassword().equals(userPassword)) {
-                    return user;
-                }
-            }
-        } catch (Exception e) {
-            return null;
-        }
-        return null;
+    public User logIn(String userLogin, String userPassword) {
+        return dbm.loginUser(userLogin, userPassword);
     }
 }

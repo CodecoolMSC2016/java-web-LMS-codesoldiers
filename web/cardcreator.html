@@ -6,6 +6,15 @@
         @import "backgroundVid.css";
         @import "card.css";
     </style>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+    <script src="cardcreator.js"></script>
 </head>
 <body>
 <video  id="bgvid" playsinline autoplay muted loop>
@@ -26,40 +35,19 @@
 </nav>
 
 <section id="content">
-    <div class="center">
-        <form id="jpshow" class="inside" method="post">
-            <textarea class="titletextarea" rows='3' placeholder='Title'></textarea>
-            <script>var textarea = document.querySelector('textarea');
-            textarea.addEventListener('keydown', autosize);
-            function autosize(){
-                var el = this;
-                setTimeout(function(){
-                    el.style.cssText = 'height:auto; padding:0';
-                    // for box-sizing other than "content-box" use:
-                    // el.style.cssText = '-moz-box-sizing:content-box';
-                    el.style.cssText = 'height:' + el.scrollHeight + 'px';
-                },0);
+    <div class="aligncenter">
+        <form class="inside" action="curriculum" method="put">
+            <h1 class="bigtitle">Add page</h1>
+            <input name="title" type="text">
 
-            }</script>
+            <input name="question" type="text">
+            <input name="maxScore" type="text">
+            <textarea id="uxMessage" name="uxMessage"></textarea>
 
-            <br> <br>
-            <textarea class="assignmenttextarea" rows='30' placeholder='Assignment text'></textarea>
-            <script>var textarea = document.querySelector('textarea');
-
-            textarea.addEventListener('keydown', autosize);
-            function autosize(){
-                var el = this;
-                setTimeout(function(){
-                    el.style.cssText = 'height:auto; padding:0';
-                    // for box-sizing other than "content-box" use:
-                    // el.style.cssText = '-moz-box-sizing:content-box';
-                    el.style.cssText = 'height:' + el.scrollHeight + 'px';
-                },0);
-            }</script>
-            <p align="center">
-            <a href="#" onclick="window.open('images/jp.gif', 'JP', 'width=620, height=400')">
-                Add Assignment
-            </a></p>
+            Text        <input id="textpage" type="radio" name="pageType" onchange="" value="addTextPage" checked>
+            Assignment  <input id="assignmentpage" type="radio" name="pageType" value="addAssignmentPage">
+            <br><br>
+            <input type="submit" value="Add page">
         </form>
     </div>
 </section>

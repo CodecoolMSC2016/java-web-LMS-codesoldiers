@@ -29,7 +29,7 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher login = request.getRequestDispatcher("profile.html");
+        RequestDispatcher login = request.getRequestDispatcher("profile.jsp");
         login.forward(request, response);
     }
 }

@@ -31,6 +31,10 @@
         <servlet-name>loginStatusServlet</servlet-name>
         <servlet-class>app.servlets.LoginStatusServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>app.servlets.UserServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>loginStatusServlet</servlet-name>
         <url-pattern>/loginstatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
             User logged = logIn(user, pass);
             if (logged != null) {
                 session.setAttribute("user", logged);
-                response.sendRedirect("curriculum");
+                response.sendRedirect("profile");
             } else {
                 request.setAttribute("messageFromServlet", "Email or password incorrect");
                 login.forward(request, response);

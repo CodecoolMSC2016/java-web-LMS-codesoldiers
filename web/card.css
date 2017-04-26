@@ -1,5 +1,5 @@
-textarea{
-    background: cyan;
+textarea, input[type=text]{
+    //background: cyan;
     opacity: 0.6;
     overflow:hidden;
     padding:10px;
@@ -16,8 +16,22 @@ textarea{
     outline: none;
 }
 
+::-webkit-input-placeholder {color: black;} /* Chrome/Opera/Safari */
+::-moz-placeholder          {color: black;} /* Firefox 19+ */
+:-ms-input-placeholder      {color: black;} /* IE 10+ */
+:-moz-placeholder           {color: black;  } /* Firefox 18- */
+
+
 .titletextarea {
     background-color: #64b3f4;
+}
+
+.formtext {
+    text-align: center;
+}
+
+.bigtitle {
+    color: midnightblue;
 }
 
 .assignmenttextarea {

@@ -27,7 +27,7 @@
 <nav id="navbar">
     <h1 class="indent-30" id="menu_title">Menu</h1>
     <div id="menu">
-        <a href="#" class="indent-20 menu_item">Profile</a>
+        <a href="profile" class="indent-20 menu_item">Profile</a>
         <a href="curriculum" class="indent-20 menu_item">Curriculum view</a>
         <a href="userlist" class="indent-20 menu_item selected_menu_item">Users</a>
         <form id='logoutform' action="logout" method="get">

@@ -18,6 +18,7 @@ video {
     filter: blur(25px);
 }
 
+/*
 .stopfade {
     opacity: .5;
 }
@@ -70,6 +71,7 @@ a {
 a:hover {
     background: rgba(0, 0, 0, 0.9);
 }
+*/
 
 @media screen and (max-width: 500px) {
     div {

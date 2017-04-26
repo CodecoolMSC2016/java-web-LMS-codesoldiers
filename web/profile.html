@@ -3,8 +3,8 @@
     <title>Home</title>
     <style>
         @import "style.css";
-        @import "login.css";
         @import "backgroundVid.css";
+        @import "card.css";
     </style>
 </head>
 <body>
@@ -27,13 +27,26 @@
 
 <section id="content">
     <div class="center">
-        <form class="inside" action="register" method="post">
-            <input class="linput" type="text" name="email">
+        <form id="profileform" class="inside" method="post">
+            <h1 class="formtext bigtitle">Profile</h1>
+            <input type="text" class="titletextarea" placeholder="Username">
+            <input type="text" class="titletextarea" placeholder="email" disabled>
             <br>
-            <input class="linput" type="password" name="pass">
+            <p class="formtext">Change password:</p>
+            <input type="text" class="titletextarea" placeholder="Current password">
+            <input type="text" class="titletextarea" placeholder="New password">
+
             <br> <br>
-            <p><input type="checkbox" name="accept">I accept terms of use</p>
-            <input class="lbutton" type="submit" value="Register">
+
+            <script>
+                var postProfile = function () {
+                    var profileform = document.getElementById("profileform");
+                    profileform.submit();
+                };
+            </script>
+            <p align="center" onclick="postProfile()">
+                <a>Update profile</a>
+            </p>
         </form>
     </div>
 </section>

@@ -48,6 +48,7 @@
             <h1 class="formtext bigtitle">Profile</h1>
             <input type="text" class="titletextarea" name="user" placeholder="Username" value="<%=user%>">
             <input type="text" class="titletextarea" name="email" placeholder="<%=email%>" disabled>
+            <input type="text" class="titletextarea" name="role" placeholder="<%=role%>" disabled>
             <br>
             <p class="formtext">Change password:</p>
             <input type="password" class="titletextarea" name="currpass" placeholder="Current password">

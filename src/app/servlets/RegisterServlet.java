@@ -24,7 +24,7 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("messageFromServlet", "User registered successfully!");
             login.forward(request, response);
         } else {
-            request.setAttribute("messageFromServlet", "Only alphabetical and digital chars allowed!");
+            request.setAttribute("messageFromServlet", "Only letters and numbers are allowed!");
             login.forward(request, response);
         }
 

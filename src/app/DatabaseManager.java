@@ -23,8 +23,8 @@ public class DatabaseManager {
     private DatabaseManager() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Aksis", "root", "");
-//            connection = DriverManager.getConnection("jdbc:mysql://192.168.150.86:3306/Aksis", "CodeSoldiers", "AksiS");
+//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Aksis", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.150.86:3306/Aksis", "CodeSoldiers", "AksiS");
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();

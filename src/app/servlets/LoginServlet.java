@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", logged);
                 response.sendRedirect("curriculum");
             } else {
-                request.setAttribute("messageFromServlet", "Username or password incorrect");
+                request.setAttribute("messageFromServlet", "Email or password incorrect");
                 login.forward(request, response);
             }
         } else {

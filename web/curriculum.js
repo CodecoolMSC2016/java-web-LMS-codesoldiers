@@ -6,6 +6,7 @@ $(document).ready(function () {
         if (data === "mentor") {
             $('#sortable').sortable({
                 update: function (event, ui) {
+                    var posts = {};
                     $('#sortable').children().each(function (i) {
                         var id = $(this).attr('data-post-id');
                         var order = $(this).index();

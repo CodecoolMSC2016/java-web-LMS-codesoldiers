@@ -4,29 +4,51 @@ import app.pages.AssignmentPage;
 import app.pages.Page;
 import app.pages.TextPage;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class PageManager {
     private static PageManager ourInstance = new PageManager();
-    private List<Page> pages;
+    private List<Page> pages = new LinkedList<>();
+    private PageLoader loader = PageLoader.getInstance();
 
     private PageManager() {
-        pages = new LinkedList<>();
-        Page.lastId = -1;
+        pages = loader.loadPages();
     }
 
     public static PageManager getInstance() {
         return ourInstance;
     }
 
-    public void addTextPage(String title, String content) {
-        pages.add(new TextPage(title, content));
+    private boolean reloadPages() {
+        pages = loader.loadPages();
+        if (pages != null) {
+            return true;
+        }
+        return false;
     }
 
-    public void addAssignmentPage(String title, String question, int maxScore) {
-        pages.add(new AssignmentPage(title, question, maxScore));
+    public List<Page> getPages() {
+        return pages;
+    }
+
+    public boolean addTextPage(String title, String content) {
+        boolean sqlSucc = loader.addTextPage(new TextPage(0, false, title, content));
+        if (sqlSucc) {
+            reloadPages();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addAssignmentPage(String title, String question, int maxScore) {
+        boolean sqlSucc = loader.addAssignmentPage(new AssignmentPage(0, false, title, question, maxScore));
+        if (sqlSucc) {
+            reloadPages();
+            return true;
+        }
+        return false;
     }
 
     public boolean removePageById(int id) {
@@ -39,11 +61,9 @@ public class PageManager {
         return false;
     }
 
-    public void reorderPages(LinkedList<Integer> orderList) {
-        List<Page> temp = new ArrayList<>(pages.size());
-        for (int i = 0; i < pages.size(); i++) {
-            temp.add(orderList.get(i), pages.get(i));
-        }
-        System.out.println(temp);
+    public boolean reorderPages(Map<Integer, Integer> orderList) {
+        loader.updateOrder(orderList);
+        reloadPages();
+        return true;
     }
 }

@@ -1,17 +1,19 @@
 package app.servlets;
 
-import app.CSVRW;
-import app.PageWriter;
-import app.Pages;
 import app.User;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,32 +23,41 @@ public class UserlistServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO: read from SQL
-        // TODO: write to webpage
-        PageWriter pageWriter = new PageWriter();
-
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        out.print(session.getAttribute("user"));
-        out.print(pageWriter.getHTMLHead("Users"));
-        out.print(pageWriter.getHTMLSidebar(Pages.USERS ,user.getUsername()));
-        out.print("<section id='content'>");
+        String role = user.getRole();
+
         try {
-            CSVRW db = new CSVRW("userdatabase.csv");
-            List<User> userdb = db.readUserDatabase();
-            for (User cUser : userdb) {
-                if (user.getRole().equals("mentor") || cUser.getRole().equals("student")) {
-                    String cUserRole = cUser.getRole();
-                    String cUserEmail = cUser.getEmail();
-                    out.print(pageWriter.getCard(cUserRole, cUserEmail, ""));
-                }
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.150.86:3306/Aksis", "CodeSoldiers", "AksiS");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = null;
+
+            if (role.equals("mentor")) {
+                resultSet = statement.executeQuery("SELECT * FROM Users");
             }
-        } catch (Exception e) {
+            else if (role.equals("student")) {
+                resultSet = statement.executeQuery("SELECT * FROM Users WHERE role='student'");
+            }
+
+            List users = new ArrayList<String[]>();
+
+            while(resultSet.next()) {
+                String[] userDatas = new String[]{
+                        resultSet.getString("username"),
+                        resultSet.getString("email"),
+                        resultSet.getString("role"),
+                };
+                users.add(userDatas);
+            }
+
+            request.setAttribute("userlist", users.toArray());
+
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("userlist.jsp");
+            requestDispatcher.forward(request, response);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
-        out.print("</section>");
-
     }
 }

@@ -17,3 +17,8 @@ th {
     text-align: start;
     padding:5px 10px 5px 10px;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+}

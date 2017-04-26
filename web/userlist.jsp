@@ -42,7 +42,7 @@
     </div>
 </nav>
 
-<section id="content">
+<section id="content" class="container">
     <ul id="sortable">
         <li class="card" data-post-id="<c:out value="${item.id}"/>">
             <h2>

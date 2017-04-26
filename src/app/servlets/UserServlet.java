@@ -20,12 +20,22 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DatabaseManager dbm = DatabaseManager.getInstance();
         User currUser = (User) request.getSession().getAttribute("user");
-        currUser.setUsername(request.getParameter("user"));
-        currUser.setPassword(request.getParameter("pass"));
-        request.setAttribute("user", currUser);
-        dbm.changeAttr(currUser);
-        request.setAttribute("messageFromServlet", "Changed successfully!");
-        response.sendRedirect("profile");
+        if (dbm.checkInputs(request.getParameter("currpass")) && dbm.checkInputs(request.getParameter("newpass"))) {
+            if (dbm.sha1(request.getParameter("currpass")).equalsIgnoreCase(currUser.getPassword())) {
+                currUser.setUsername(request.getParameter("user"));
+                currUser.setPassword(request.getParameter("pass"));
+                request.setAttribute("user", currUser);
+                dbm.changeAttr(currUser);
+                request.setAttribute("messageFromServlet", "Changed successfully!");
+                response.sendRedirect("profile");
+            } else {
+                request.setAttribute("messageFromServlet", "Incorrect password!");
+                response.sendRedirect("profile");
+            }
+        } else {
+            request.setAttribute("messageFromServlet", "Only letters and numbers are allowed!");
+            response.sendRedirect("profile");
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

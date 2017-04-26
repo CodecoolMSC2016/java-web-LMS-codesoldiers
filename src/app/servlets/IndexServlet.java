@@ -15,6 +15,6 @@ public class IndexServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LoginHelper.redirectLogin(request, response, "welcome");
+        LoginHelper.redirectLogin(request, response, "curriculum");
     }
 }

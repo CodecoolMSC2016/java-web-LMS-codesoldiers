@@ -6,7 +6,6 @@ public class User {
     private String role;
     private String password;
 
-    // TODO: SHA-1 pass
     public User(String username, String emailAddress, String role, String password) {
         this.username = username;
         this.emailAddress = emailAddress;
@@ -35,6 +34,13 @@ public class User {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
 
 

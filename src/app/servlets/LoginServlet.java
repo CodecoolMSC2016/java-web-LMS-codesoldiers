@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
         RequestDispatcher login = request.getRequestDispatcher("login.jsp");
         messages.put("error", "Email or password incorrect");
         messages.put("formaterror", "Only letters and numbers are allowed!");
+        messages.put("regsuccess", "User registered successfully!");
         for(String error: messages.keySet()) {
             if(request.getParameterMap().containsKey(error)) {
                 request.setAttribute("messageFromServlet", messages.get(error));

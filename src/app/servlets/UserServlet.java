@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by david_szilagyi on 2017.04.26..
@@ -53,14 +55,15 @@ public class UserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher login = request.getRequestDispatcher("profile.jsp");
-        if (request.getParameterMap().containsKey("success")) {
-            request.setAttribute("messageFromServlet", "Changed successfully!");
-        } else if (request.getParameterMap().containsKey("formaterror")) {
-            request.setAttribute("messageFromServlet", "Only letters and numbers are allowed!");
-        } else if (request.getParameterMap().containsKey("wrongpass")) {
-            request.setAttribute("messageFromServlet", "Incorrect password!");
-        } else if (request.getParameterMap().containsKey("missingname")) {
-            request.setAttribute("messageFromServlet", "Username required!");
+        Map<String, String> messages = new HashMap<>();
+        messages.put("success", "Changed successfully!");
+        messages.put("formaterror", "Only letters and numbers are allowed!");
+        messages.put("wrongpass", "Incorrect password!");
+        messages.put("missingname", "Username required!");
+        for(String error: messages.keySet()) {
+            if(request.getParameterMap().containsKey(error)) {
+                request.setAttribute("messageFromServlet", messages.get(error));
+            }
         }
         login.forward(request, response);
     }

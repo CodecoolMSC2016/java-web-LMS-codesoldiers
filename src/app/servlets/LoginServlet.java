@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher login = request.getRequestDispatcher("login.jsp");
-        messages.put("error", "Email or password incorrect");
+        messages.put("loginerror", "Email or password incorrect");
         messages.put("formaterror", "Only letters and numbers are allowed!");
         messages.put("regsuccess", "User registered successfully!");
         for(String error: messages.keySet()) {

@@ -99,7 +99,7 @@ public class PageLoader {
 
     public boolean addTextPage(TextPage page) {
         try {
-            if (!checkInputs(page.getTitle()) || checkInputs(page.getContent())) {
+            if (!checkInputs(page.getTitle()) || !checkInputs(page.getContent())) {
                 throw new SQLException("SQL injection protection");
             }
             String countQ = "SELECT COUNT(*) FROM Pages";

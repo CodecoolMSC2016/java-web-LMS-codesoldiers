@@ -11,14 +11,10 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 public class DatabaseManager {
+    private static DatabaseManager ourInstance = new DatabaseManager();
     Connection connection;
     Statement statement;
     ResultSet resultSet;
-    private static DatabaseManager ourInstance = new DatabaseManager();
-
-    public static DatabaseManager getInstance() {
-        return ourInstance;
-    }
 
     private DatabaseManager() {
         try {
@@ -29,6 +25,23 @@ public class DatabaseManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static DatabaseManager getInstance() {
+        return ourInstance;
+    }
+
+    public static boolean checkInputs(String string) {
+        for (int i = 0; i < string.length(); i++) {
+            if (Character.compare(string.charAt(i), '@') != 0 &&
+                    Character.compare(string.charAt(i), '.') != 0 &&
+                    Character.compare(string.charAt(i), ' ') != 0) {
+                if (!Character.isLetterOrDigit(string.charAt(i))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public void addNewUser(String username, String email, String role, String pass) {
@@ -82,17 +95,6 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return sha1;
-    }
-
-    public static boolean checkInputs(String string) {
-        for (int i = 0; i < string.length(); i++) {
-            if (Character.compare(string.charAt(i), '@') != 0 && Character.compare(string.charAt(i), '.') != 0) {
-                if (!Character.isLetterOrDigit(string.charAt(i))) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     public void deleteUser(String currEmail) {

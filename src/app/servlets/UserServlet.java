@@ -19,6 +19,7 @@ import java.util.Map;
 
 public class UserServlet extends HttpServlet {
     DatabaseManager dbm = DatabaseManager.getInstance();
+    Map<String, String> messages = new HashMap<>();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currUser = (User) request.getSession().getAttribute("user");
@@ -55,7 +56,6 @@ public class UserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher login = request.getRequestDispatcher("profile.jsp");
-        Map<String, String> messages = new HashMap<>();
         messages.put("success", "Changed successfully!");
         messages.put("formaterror", "Only letters and numbers are allowed!");
         messages.put("wrongpass", "Incorrect password!");

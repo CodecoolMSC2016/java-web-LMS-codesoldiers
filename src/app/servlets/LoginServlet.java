@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginServlet extends HttpServlet {
     DatabaseManager dbm = DatabaseManager.getInstance();
+    Map<String, String> messages = new HashMap<>();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,10 +40,12 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher login = request.getRequestDispatcher("login.jsp");
-        if (request.getParameterMap().containsKey("loginerror")) {
-            request.setAttribute("messageFromServlet", "Email or password incorrect");
-        } else if (request.getParameterMap().containsKey("formaterror")) {
-            request.setAttribute("messageFromServlet", "Only letters and numbers are allowed!");
+        messages.put("error", "Email or password incorrect");
+        messages.put("formaterror", "Only letters and numbers are allowed!");
+        for(String error: messages.keySet()) {
+            if(request.getParameterMap().containsKey(error)) {
+                request.setAttribute("messageFromServlet", messages.get(error));
+            }
         }
         login.forward(request, response);
     }

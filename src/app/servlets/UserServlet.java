@@ -21,18 +21,22 @@ public class UserServlet extends HttpServlet {
         User currUser = (User) request.getSession().getAttribute("user");
         if (dbm.checkInputs(request.getParameter("currpass")) && dbm.checkInputs(request.getParameter("newpass"))
                 && dbm.checkInputs(request.getParameter("user"))) {
-            if (dbm.sha1(request.getParameter("currpass")).equalsIgnoreCase(currUser.getPassword())) {
-                currUser.setUsername(request.getParameter("user"));
-                if (!request.getParameter("newpass").equalsIgnoreCase("")) {
-                    currUser.setPassword(dbm.sha1(request.getParameter("newpass")));
+            if (!request.getParameter("user").equalsIgnoreCase("")) {
+                if (dbm.sha1(request.getParameter("currpass")).equalsIgnoreCase(currUser.getPassword())) {
+                    currUser.setUsername(request.getParameter("user"));
+                    if (!request.getParameter("newpass").equalsIgnoreCase("")) {
+                        currUser.setPassword(dbm.sha1(request.getParameter("newpass")));
+                    } else {
+                        currUser.setPassword(dbm.sha1(request.getParameter("currpass")));
+                    }
+                    request.setAttribute("user", currUser);
+                    dbm.changeAttr(currUser);
+                    response.sendRedirect("profile?success");
                 } else {
-                    currUser.setPassword(dbm.sha1(request.getParameter("currpass")));
+                    response.sendRedirect("profile?wrongpass");
                 }
-                request.setAttribute("user", currUser);
-                dbm.changeAttr(currUser);
-                response.sendRedirect("profile?success");
             } else {
-                response.sendRedirect("profile?wrongpass");
+                response.sendRedirect("profile?missingname");
             }
         } else {
             response.sendRedirect("profile?formaterror");
@@ -47,6 +51,8 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("messageFromServlet", "Only letters and numbers are allowed!");
         } else if (request.getParameterMap().containsKey("wrongpass")) {
             request.setAttribute("messageFromServlet", "Incorrect password!");
+        } else if (request.getParameterMap().containsKey("missingname")) {
+            request.setAttribute("messageFromServlet", "Username required!");
         }
         login.forward(request, response);
     }

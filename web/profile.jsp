@@ -13,12 +13,12 @@
         @import "style.css";
         @import "backgroundVid.css";
         @import "card.css";
-        @import "cardcreator.css";
+        @import "profile.css";
     </style>
     <c:if test="${messageFromServlet != null}">
         <div class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <% String message = (String)request.getAttribute("messageFromServlet");%>
+            <% String message = (String) request.getAttribute("messageFromServlet");%>
             <script>var msg = "<%=message%>";
             alert(msg);
             </script>
@@ -26,7 +26,7 @@
     </c:if>
 </head>
 <body>
-<video  id="bgvid" playsinline autoplay muted loop>
+<video id="bgvid" playsinline autoplay muted loop>
     <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
     <source src="images/moytains%20(loop).mp4" type="video/webm">
     <source src="images/moytains%20(loop).mp4" type="video/mp4">
@@ -49,26 +49,41 @@
     </div>
 </nav>
 
-<section id="content">
-    <div class="center">
-        <form id="profileform" class="inside creatorform" method="post">
-            <h1 class="aligncenter bigtitle">Profile</h1>
-            <input type="text" name="user" placeholder="Username" value="kaka">
-            <input type="text" name="email" placeholder="kaka@kaka.hu" disabled="">
-            <br>
-            <p class="aligncenter">Change password:</p>
-            <input type="password" name="currpass" placeholder="Current password">
-            <input type="password" name="newpass" placeholder="New password">
-            <script>
-                var postProfile = function () {
-                    var profileform = document.getElementById("profileform");
-                    profileform.submit();
-                };
-            </script>
-            <p align="center" onclick="postProfile()">
-                <a>Update profile</a>
-            </p>
-        </form>
+<section id="content" class="container">
+    <div class="card">
+        <div class="profile">
+            <form id="profileform" method="post">
+                <h1 class="aligncenter bigtitle">Profile</h1>
+                <hr>
+                <table>
+                    <tr>
+                        <td align="right">Username:</td>
+                        <td><input type="text" name="user" placeholder="Username" value="<%=user%>"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">E-mail:</td>
+                        <td><input type="text" name="email" placeholder="Email" disabled="" value="<%=email%>"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Role:</td>
+                        <td><input type="text" name="role" placeholder="Role" disabled="" value="<%=role%>"></td>
+                    </tr>
+                </table>
+                <br>
+                <p class="aligncenter">Change password:</p>
+                <input type="password" name="currpass" placeholder="Current password">
+                <input type="password" name="newpass" placeholder="New password">
+                <script>
+                    var postProfile = function () {
+                        var profileform = document.getElementById("profileform");
+                        profileform.submit();
+                    };
+                </script>
+                <p align="center" onclick="postProfile()">
+                    <a>Update profile</a>
+                </p>
+            </form>
+        </div>
     </div>
 </section>
 

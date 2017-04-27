@@ -122,3 +122,8 @@ p {
     border-color: transparent;
     font-family: inherit;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+}

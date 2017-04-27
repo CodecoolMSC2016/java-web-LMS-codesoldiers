@@ -31,10 +31,11 @@
     <source src="images/moytains%20(loop).mp4" type="video/webm">
     <source src="images/moytains%20(loop).mp4" type="video/mp4">
 </video>
+
 <nav id="navbar">
-    <h2 class="indent-30" id="menu_title">Menu</h2>
+    <h1 class="indent-30" id="menu_title">Menu</h1>
     <div id="menu">
-        <a href=""><h3 class="indent-20 menu_item selected_menu_item">Login</h3></a>
+        <a href="login" class="indent-20 menu_item selected_menu_item">Login</a>
     </div>
     <div class="indent-20" id="company_name">
         <h5>created by</h5>
@@ -42,6 +43,7 @@
         <h5>- 2017 -</h5>
     </div>
 </nav>
+
 
 <section id="content">
     <div class="center">

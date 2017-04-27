@@ -74,10 +74,17 @@
             </c:if>
         </c:forEach>
     </ul>
-    <script type="text/javascript" src="curriculum.js">
-    </script>
+    <ul>
+        <li class="card" data-post-id="addPage" onclick="location.href='cardcreator.html';">
+            <div class="addpage">
+                +
+            </div>
+        </li>
+    </ul>
     <p id="console"></p>
 </section>
+
+<script type="text/javascript" src="curriculum.js"></script>
 
 </body>
 </html>

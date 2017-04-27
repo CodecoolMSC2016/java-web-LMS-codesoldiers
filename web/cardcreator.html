@@ -23,9 +23,15 @@
     <source src="images/moytains%20(loop).mp4" type="video/mp4">
 </video>
 <nav id="navbar">
-    <h2 class="indent-30" id="menu_title">Menu</h2>
+    <h1 class="indent-30" id="menu_title">Menu</h1>
     <div id="menu">
-        <a href=""><h3 class="indent-20 menu_item selected_menu_item">Register</h3></a>
+        <a href="profile" class="indent-20 menu_item">Profile</a>
+        <a href="curriculum" class="indent-20 menu_item">Curriculum view</a>
+        <a href="userlist" class="indent-20 menu_item">Users</a>
+        <form id='logoutform' action="logout" method="get">
+            <input type="submit" value="Logout"
+                   name="Logout" id="logout" class="indent-20 menu_item emptybutton">
+        </form>
     </div>
     <div class="indent-20" id="company_name">
         <h5>created by</h5>

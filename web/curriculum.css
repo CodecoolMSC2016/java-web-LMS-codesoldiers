@@ -12,3 +12,12 @@ li:hover {
 li:active {
     background: #999;
 }
+
+.addpage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: auto;
+    font-size: 10em;
+    cursor: default;
+}

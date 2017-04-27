@@ -7,6 +7,8 @@ import app.pages.TextPage;
 import java.sql.*;
 import java.util.*;
 
+import static app.DatabaseManager.checkInputs;
+
 public class PageLoader {
     private static PageLoader ourInstance = new PageLoader();
     private Connection connection;
@@ -77,6 +79,9 @@ public class PageLoader {
 
     public boolean addAssignmentPage(AssignmentPage page) {
         try {
+            if (!checkInputs(page.getTitle()) || checkInputs(page.getQuestion())) {
+                throw new SQLException("SQL injection protection");
+            }
             String countQ = "SELECT COUNT(*) FROM Pages";
             ResultSet countSet = statement.executeQuery(countQ);
             countSet.next();
@@ -94,6 +99,9 @@ public class PageLoader {
 
     public boolean addTextPage(TextPage page) {
         try {
+            if (!checkInputs(page.getTitle()) || checkInputs(page.getContent())) {
+                throw new SQLException("SQL injection protection");
+            }
             String countQ = "SELECT COUNT(*) FROM Pages";
             ResultSet countSet = statement.executeQuery(countQ);
             countSet.next();

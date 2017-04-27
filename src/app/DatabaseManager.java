@@ -84,7 +84,7 @@ public class DatabaseManager {
         return sha1;
     }
 
-    public boolean checkInputs(String string) {
+    public static boolean checkInputs(String string) {
         for (int i = 0; i < string.length(); i++) {
             if (Character.compare(string.charAt(i), '@') != 0 && Character.compare(string.charAt(i), '.') != 0) {
                 if (!Character.isLetterOrDigit(string.charAt(i))) {

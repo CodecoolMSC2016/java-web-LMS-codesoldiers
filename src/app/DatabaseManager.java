@@ -94,4 +94,17 @@ public class DatabaseManager {
         }
         return true;
     }
+
+    public void deleteUser(String currEmail) {
+        String check = String.format("SELECT * FROM Users WHERE email=\"%s\" AND pass=\"%s\";", currEmail);
+        try {
+            resultSet = statement.executeQuery(check);
+            if (resultSet.next()) {
+                String deleteUser = String.format("DELETE FROM Users WHERE email=\"%s\";", currEmail);
+                statement.executeUpdate(deleteUser);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -19,7 +20,14 @@ public class UserServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currUser = (User) request.getSession().getAttribute("user");
-        if (dbm.checkInputs(request.getParameter("currpass")) && dbm.checkInputs(request.getParameter("newpass"))
+        if (request.getParameter("deleteUser").equalsIgnoreCase("")) {
+            if (dbm.sha1(request.getParameter("currpass")).equalsIgnoreCase(currUser.getPassword())) {
+                dbm.deleteUser(currUser.getEmail());
+                response.sendRedirect("logout?deleted");
+            } else {
+                response.sendRedirect("profile?wrongpass");
+            }
+        } else if (dbm.checkInputs(request.getParameter("currpass")) && dbm.checkInputs(request.getParameter("newpass"))
                 && dbm.checkInputs(request.getParameter("user"))) {
             if (!request.getParameter("user").equalsIgnoreCase("")) {
                 if (dbm.sha1(request.getParameter("currpass")).equalsIgnoreCase(currUser.getPassword())) {

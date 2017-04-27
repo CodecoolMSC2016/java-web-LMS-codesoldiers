@@ -13,6 +13,9 @@ public class LogoutServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameterMap().containsKey("deleted")) {
+            request.setAttribute("messageFromServlet", "User deleted!");
+        }
         HttpSession session = request.getSession();
         session.removeAttribute("user");
         session.invalidate();

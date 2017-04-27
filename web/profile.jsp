@@ -78,7 +78,18 @@
                         var profileform = document.getElementById("profileform");
                         profileform.submit();
                     };
+
+                    var deleteProfile = function () {
+                        var delform = document.getElementById("delform");
+                        delform.submit();
+                    };
                 </script>
+                <form id="delform" action="userservlet" method="post">
+                    <input name="deleteUser" style="display: none">
+                    <p align="center" onclick="deleteProfile()">
+                        <a>Delete profile</a>
+                    </p>
+                </form>
                 <p align="center" onclick="postProfile()">
                     <a>Update profile</a>
                 </p>

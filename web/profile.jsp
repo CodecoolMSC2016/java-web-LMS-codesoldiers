@@ -13,6 +13,7 @@
         @import "style.css";
         @import "backgroundVid.css";
         @import "card.css";
+        @import "cardcreator.css";
     </style>
     <c:if test="${messageFromServlet != null}">
         <div class="alert alert-danger" role="alert">
@@ -50,15 +51,14 @@
 
 <section id="content">
     <div class="center">
-        <form id="profileform" class="inside" method="post">
-            <h1 class="formtext bigtitle">Profile</h1>
-            <input type="text" class="titletextarea" name="user" placeholder="Username" value="<%=user%>">
-            <input type="text" class="titletextarea" name="email" placeholder="<%=email%>" disabled>
-            <input type="text" class="titletextarea" name="role" placeholder="<%=role%>" disabled>
+        <form id="profileform" class="inside creatorform" method="post">
+            <h1 class="aligncenter bigtitle">Profile</h1>
+            <input type="text" name="user" placeholder="Username" value="kaka">
+            <input type="text" name="email" placeholder="kaka@kaka.hu" disabled="">
             <br>
-            <p class="formtext">Change password:</p>
-            <input type="password" class="titletextarea" name="currpass" placeholder="Current password">
-            <input type="password" class="titletextarea" name="newpass" placeholder="New password">
+            <p class="aligncenter">Change password:</p>
+            <input type="password" name="currpass" placeholder="Current password">
+            <input type="password" name="newpass" placeholder="New password">
             <script>
                 var postProfile = function () {
                     var profileform = document.getElementById("profileform");

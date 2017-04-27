@@ -12,10 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.LinkedList;
 import java.util.Map;
 
 public class CurriculumServlet extends HttpServlet {
+    static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PageManager pageManager = PageManager.getInstance();
         Map<String, String[]> parameterMap = request.getParameterMap();
@@ -35,9 +39,7 @@ public class CurriculumServlet extends HttpServlet {
         PageManager pageManager = PageManager.getInstance();
         Map<String, String[]> parameterMap = request.getParameterMap();
         String method = request.getParameter("method");
-        System.out.println(request.getParameter("method"));
 
-        // TODO: restful
         int error = 500;
         switch (method) {
             case "modify":
@@ -58,17 +60,13 @@ public class CurriculumServlet extends HttpServlet {
         }
     }
 
-    static String convertStreamToString(java.io.InputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
-
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PageManager pageManager = PageManager.getInstance();
 
         String parameterString = convertStreamToString(request.getInputStream()); //1 string, json
 
-        Type type = new TypeToken<Map<String, String>>() {}.getType();
+        Type type = new TypeToken<Map<String, String>>() {
+        }.getType();
         Gson gson = new Gson();
 
         Map<String, String> parameterMap = gson.fromJson(parameterString, type);
@@ -140,7 +138,8 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     private boolean reorderPages(PageManager pageManager, Map<String, String[]> parameterMap) {
-        Type type = new TypeToken<Map<Integer, Integer>>() {}.getType();
+        Type type = new TypeToken<Map<Integer, Integer>>() {
+        }.getType();
         Gson gson = new Gson();
 
         String json = parameterMap.get("json")[0];

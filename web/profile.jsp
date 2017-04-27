@@ -19,6 +19,7 @@
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
+    <script src="profile.js"></script>
     <c:if test="${messageFromServlet != null}">
         <div class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -92,16 +93,18 @@
 
             </form>
             <div>
-                <a onclick="$.post('test.php', { deleteUser:'' } );">Delete profile</a>
+                <a onclick="postDelete()">
+                    Delete profile
+                </a>
             </div>
-<%--
-            <form id="delform" action="userservlet" method="post">
-                <input name="deleteUser" style="display: none">
-                <p align="center" onclick="deleteProfile()">
-                    <a>Delete profile</a>
-                </p>
-            </form>
---%>
+            <%--
+                        <form id="delform" action="userservlet" method="post">
+                            <input name="deleteUser" style="display: none">
+                            <p align="center" onclick="deleteProfile()">
+                                <a>Delete profile</a>
+                            </p>
+                        </form>
+            --%>
         </div>
     </div>
 </section>

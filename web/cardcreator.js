@@ -31,12 +31,3 @@ function sendPut() {
         alert( "error" );
     });
 }
-
-/*
- var values = {};
- $('#form :input').each(function () {
- values[this.name] = $(this).val();
- });
- console.log(values);
- */
-

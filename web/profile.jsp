@@ -78,33 +78,17 @@
                 <p class="aligncenter">Change password:</p>
                 <input type="password" name="currpass" placeholder="Current password">
                 <input type="password" name="newpass" placeholder="New password">
-                <script>
-                    var deleteProfile = function () {
-                        var delform = document.getElementById("delform");
-                        delform.submit();
-
-                    };
-                </script>
-
-
                 <div align="center">
                     <a onclick="document.getElementById('profileform').submit();">Update profile</a>
                 </div>
 
             </form>
             <div>
+
                 <a onclick="postDelete()">
                     Delete profile
                 </a>
             </div>
-            <%--
-                        <form id="delform" action="userservlet" method="post">
-                            <input name="deleteUser" style="display: none">
-                            <p align="center" onclick="deleteProfile()">
-                                <a>Delete profile</a>
-                            </p>
-                        </form>
-            --%>
         </div>
     </div>
 </section>

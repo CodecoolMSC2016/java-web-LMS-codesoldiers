@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static app.DatabaseManager.checkInputs;
+
 /**
  * Created by david_szilagyi on 2017.04.26..
  */
@@ -22,19 +24,20 @@ public class UserServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currUser = (User) request.getSession().getAttribute("user");
-        Map parametermap = request.getParameterMap();
-        if (request.getParameter("deleteUser").equalsIgnoreCase("")) {
+        if (request.getParameterMap().keySet().contains("deleteUser")) {
             String param = request.getParameter("currpass");
             String sha1 = dbm.sha1(param);
             String pass = currUser.getPassword();
             if (sha1.equalsIgnoreCase(pass)) {
                 dbm.deleteUser(currUser.getEmail());
-                response.sendRedirect("logout?deleted");
+                response.setStatus(201);
+                response.getWriter().print("{}");
             } else {
-                response.sendRedirect("profile?wrongpass");
+                response.setStatus(404);
+                response.getWriter().print("{}");
             }
-        } else if (dbm.checkInputs(request.getParameter("currpass")) && dbm.checkInputs(request.getParameter("newpass"))
-                && dbm.checkInputs(request.getParameter("user"))) {
+        } else if (checkInputs(request.getParameter("currpass")) && checkInputs(request.getParameter("newpass"))
+                && checkInputs(request.getParameter("user"))) {
             if (!request.getParameter("user").equalsIgnoreCase("")) {
                 if (dbm.sha1(request.getParameter("currpass")).equalsIgnoreCase(currUser.getPassword())) {
                     currUser.setUsername(request.getParameter("user"));

@@ -74,13 +74,15 @@
             </c:if>
         </c:forEach>
     </ul>
-    <ul>
-        <li class="card" data-post-id="addPage" onclick="location.href='cardcreator.html';">
-            <div class="addpage">
-                +
-            </div>
-        </li>
-    </ul>
+    <c:if test="${user.role == 'mentor'}">
+        <ul>
+            <li class="card" data-post-id="addPage" onclick="location.href='cardcreator.html';">
+                <div class="addpage">
+                    +
+                </div>
+            </li>
+        </ul>
+    </c:if>
     <p id="console"></p>
 </section>
 

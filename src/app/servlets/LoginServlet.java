@@ -16,7 +16,7 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if (dbm.checkInputs(request.getParameter("pass"))) {
+        if (dbm.checkInputs(request.getParameter("pass")) && dbm.checkInputs(request.getParameter("email")))  {
             String user = request.getParameter("email");
             String pass = request.getParameter("pass");
 

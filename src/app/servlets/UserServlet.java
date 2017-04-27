@@ -19,10 +19,15 @@ public class UserServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currUser = (User) request.getSession().getAttribute("user");
-        if (dbm.checkInputs(request.getParameter("currpass")) && dbm.checkInputs(request.getParameter("newpass"))) {
+        if (dbm.checkInputs(request.getParameter("currpass")) && dbm.checkInputs(request.getParameter("newpass"))
+                && dbm.checkInputs(request.getParameter("user"))) {
             if (dbm.sha1(request.getParameter("currpass")).equalsIgnoreCase(currUser.getPassword())) {
                 currUser.setUsername(request.getParameter("user"));
-                currUser.setPassword(request.getParameter("newpass"));
+                if (!request.getParameter("newpass").equalsIgnoreCase("")) {
+                    currUser.setPassword(dbm.sha1(request.getParameter("newpass")));
+                } else {
+                    currUser.setPassword(dbm.sha1(request.getParameter("currpass")));
+                }
                 request.setAttribute("user", currUser);
                 dbm.changeAttr(currUser);
                 response.sendRedirect("profile?success");

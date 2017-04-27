@@ -48,7 +48,7 @@ public class DatabaseManager {
             resultSet = statement.executeQuery(check);
             if (resultSet.next()) {
                 String update = String.format("UPDATE Users SET username=\"%s\",role=\"%s\",pass=\"%s\" WHERE email=\"%s\";",
-                        user.getUsername(), user.getRole(), sha1(user.getPassword()), user.getEmail());
+                        user.getUsername(), user.getRole(), user.getPassword(), user.getEmail());
                 statement.executeUpdate(update);
             }
         } catch (SQLException e) {
@@ -86,8 +86,10 @@ public class DatabaseManager {
 
     public boolean checkInputs(String string) {
         for (int i = 0; i < string.length(); i++) {
-            if (!Character.isLetterOrDigit(string.charAt(i))) {
-                return false;
+            if (Character.compare(string.charAt(i), '@') != 0 && Character.compare(string.charAt(i), '.') != 0) {
+                if (!Character.isLetterOrDigit(string.charAt(i))) {
+                    return false;
+                }
             }
         }
         return true;

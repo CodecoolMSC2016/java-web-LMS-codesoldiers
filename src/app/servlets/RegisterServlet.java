@@ -15,7 +15,8 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         RequestDispatcher login = request.getRequestDispatcher("login.jsp");
-        if (dbm.checkInputs(request.getParameter("pass"))) {
+        if (dbm.checkInputs(request.getParameter("pass")) && dbm.checkInputs(request.getParameter("email"))
+                && dbm.checkInputs(request.getParameter("user"))) {
             dbm.addNewUser(request.getParameter("user"),
                     request.getParameter("email"),
                     request.getParameter("role"),

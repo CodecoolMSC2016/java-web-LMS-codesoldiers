@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,8 +22,12 @@ public class UserServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currUser = (User) request.getSession().getAttribute("user");
+        Map parametermap = request.getParameterMap();
         if (request.getParameter("deleteUser").equalsIgnoreCase("")) {
-            if (dbm.sha1(request.getParameter("currpass")).equalsIgnoreCase(currUser.getPassword())) {
+            String param = request.getParameter("currpass");
+            String sha1 = dbm.sha1(param);
+            String pass = currUser.getPassword();
+            if (sha1.equalsIgnoreCase(pass)) {
                 dbm.deleteUser(currUser.getEmail());
                 response.sendRedirect("logout?deleted");
             } else {

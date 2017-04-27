@@ -17,7 +17,7 @@
     <script src="cardcreator.js"></script>
 </head>
 <body>
-<video  id="bgvid" playsinline autoplay muted loop>
+<video id="bgvid" playsinline autoplay muted loop>
     <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
     <source src="images/moytains%20(loop).mp4" type="video/webm">
     <source src="images/moytains%20(loop).mp4" type="video/mp4">
@@ -36,18 +36,24 @@
 
 <section id="content">
     <div class="aligncenter">
-        <form class="inside" action="curriculum" method="put">
+        <form class="inside" id="form" action="">
             <h1 class="bigtitle">Add page</h1>
-            <input name="title" type="text">
+            <input name="title" type="text" placeholder="Title">
 
-            <input name="question" type="text">
-            <input name="maxScore" type="text">
-            <textarea id="uxMessage" name="uxMessage"></textarea>
+            <div id="assignment" hidden>
+                <input name="question" type="text" placeholder="Question">
+                <input name="maxScore" type="text" placeholder="Max Score">
+            </div>
+            <div id="text" hidden>
+                <textarea name="content" placeholder="Content"></textarea>
+            </div>
 
-            Text        <input id="textpage" type="radio" name="pageType" onchange="" value="addTextPage" checked>
-            Assignment  <input id="assignmentpage" type="radio" name="pageType" value="addAssignmentPage">
+            Text <input id="textpage" type="radio" name="pageType" onchange="radioChanged('text')" value="addTextPage"
+                        checked>
+            Assignment <input id="assignmentpage" type="radio" name="pageType" onchange="radioChanged('assignment')"
+                              value="addAssignmentPage">
             <br><br>
-            <input type="submit" value="Add page">
+            <button type="button" onmousedown="sendPut()">submit</button>
         </form>
     </div>
 </section>

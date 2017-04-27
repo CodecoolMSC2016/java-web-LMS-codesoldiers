@@ -64,6 +64,12 @@
                     <c:if test="${item['class'] == 'class app.pages.TextPage'}">
                         <c:out value="${item.content}"/>
                     </c:if>
+
+                    <c:if test="${item['class'] == 'class app.pages.AssignmentPage'}">
+                        <c:out value="${item.question}"/>
+                        <br>
+                        Maximum score: <c:out value="${item.maxScore}"/>
+                    </c:if>
                 </li>
             </c:if>
         </c:forEach>

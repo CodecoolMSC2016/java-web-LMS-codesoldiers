@@ -25,12 +25,16 @@ textarea, input[type=text], input[type=password]{
     background-color: #64b3f4;
 }
 
-.formtext {
+.aligncenter {
     text-align: center;
 }
 
 .bigtitle {
     color: midnightblue;
+}
+
+.text {
+    height: 100px;
 }
 
 .assignmenttextarea {

@@ -58,29 +58,43 @@ public class CurriculumServlet extends HttpServlet {
         }
     }
 
+    static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PageManager pageManager = PageManager.getInstance();
-        Map<String, String[]> parameterMap = request.getParameterMap();
+
+        String parameterString = convertStreamToString(request.getInputStream()); //1 string, json
+
+        Type type = new TypeToken<Map<String, String>>() {}.getType();
+        Gson gson = new Gson();
+
+        Map<String, String> parameterMap = gson.fromJson(parameterString, type);
+
 
         int error = 500;
-        String method = request.getParameter("method");
-        switch (method) {
+        String pageType = parameterMap.get("pageType");
+        switch (pageType) {
             case "addTextPage":
                 // title, content
-                addTextPage(pageManager, parameterMap);
+                error = addTextPage(pageManager, parameterMap) ? 201 : 500;
                 break;
             case "addAssignmentPage":
                 // title, question, maxScore
-                error = addAssignmentPage(pageManager, parameterMap) ? 200 : 500;
+                error = addAssignmentPage(pageManager, parameterMap) ? 201 : 500;
                 break;
             default:
                 error = 404;
                 break;
         }
         if (error >= 400) {
-            response.sendError(error);
+            response.setStatus(error);
+            response.getWriter().print("{}");
         } else {
-            response.sendRedirect("/curriculum");
+            response.setStatus(error);
+            response.getWriter().print("{}");
         }
     }
 
@@ -89,31 +103,31 @@ public class CurriculumServlet extends HttpServlet {
         return -1;
     }
 
-    private int addTextPage(PageManager pageManager, Map<String, String[]> parameterMap) {
+    private boolean addTextPage(PageManager pageManager, Map<String, String> parameterMap) {
         // required params: title, content
 
         if (parameterMap.containsKey("title") &&
                 parameterMap.containsKey("content")) {
-            String title = parameterMap.get("title")[0];
-            String content = parameterMap.get("content")[0];
+            String title = parameterMap.get("title");
+            String content = parameterMap.get("content");
             if (!title.equals("") || !content.equals("")) {
                 pageManager.addTextPage(title, content);
-                return 200;
+                return true;
             }
         }
-        return 400;
+        return false;
     }
 
-    private boolean addAssignmentPage(PageManager pageManager, Map<String, String[]> parameterMap) {
+    private boolean addAssignmentPage(PageManager pageManager, Map<String, String> parameterMap) {
         // required params: title, question, maxScore
 
         if (parameterMap.containsKey("title") &&
                 parameterMap.containsKey("question") &&
                 parameterMap.containsKey("maxScore")) {
             try {
-                String title = parameterMap.get("title")[0];
-                String question = parameterMap.get("question")[0];
-                int maxScore = Integer.valueOf(parameterMap.get("maxScore")[0]);
+                String title = parameterMap.get("title");
+                String question = parameterMap.get("question");
+                int maxScore = Integer.valueOf(parameterMap.get("maxScore"));
                 if (!title.equals("") || !question.equals("")) {
                     pageManager.addAssignmentPage(title, question, maxScore);
                     return true;

@@ -6,9 +6,18 @@
         @import "backgroundVid.css";
         @import "card.css";
     </style>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+    <script src="cardcreator.js"></script>
 </head>
 <body>
-<video  id="bgvid" playsinline autoplay muted loop>
+<video id="bgvid" playsinline autoplay muted loop>
     <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
     <source src="images/moytains%20(loop).mp4" type="video/webm">
     <source src="images/moytains%20(loop).mp4" type="video/mp4">
@@ -26,40 +35,25 @@
 </nav>
 
 <section id="content">
-    <div class="center">
-        <form id="jpshow" class="inside" method="post">
-            <textarea class="titletextarea" rows='3' placeholder='Title'></textarea>
-            <script>var textarea = document.querySelector('textarea');
-            textarea.addEventListener('keydown', autosize);
-            function autosize(){
-                var el = this;
-                setTimeout(function(){
-                    el.style.cssText = 'height:auto; padding:0';
-                    // for box-sizing other than "content-box" use:
-                    // el.style.cssText = '-moz-box-sizing:content-box';
-                    el.style.cssText = 'height:' + el.scrollHeight + 'px';
-                },0);
+    <div class="aligncenter">
+        <form class="inside" id="form" action="">
+            <h1 class="bigtitle">Add page</h1>
+            <input name="title" type="text" placeholder="Title">
 
-            }</script>
+            <div id="assignment" hidden>
+                <input name="question" type="text" placeholder="Question">
+                <input name="maxScore" type="text" placeholder="Max Score">
+            </div>
+            <div id="text" hidden>
+                <textarea name="content" placeholder="Content"></textarea>
+            </div>
 
-            <br> <br>
-            <textarea class="assignmenttextarea" rows='30' placeholder='Assignment text'></textarea>
-            <script>var textarea = document.querySelector('textarea');
-
-            textarea.addEventListener('keydown', autosize);
-            function autosize(){
-                var el = this;
-                setTimeout(function(){
-                    el.style.cssText = 'height:auto; padding:0';
-                    // for box-sizing other than "content-box" use:
-                    // el.style.cssText = '-moz-box-sizing:content-box';
-                    el.style.cssText = 'height:' + el.scrollHeight + 'px';
-                },0);
-            }</script>
-            <p align="center">
-            <a href="#" onclick="window.open('images/jp.gif', 'JP', 'width=620, height=400')">
-                Add Assignment
-            </a></p>
+            Text <input id="textpage" type="radio" name="pageType" onchange="radioChanged('text')" value="addTextPage"
+                        checked>
+            Assignment <input id="assignmentpage" type="radio" name="pageType" onchange="radioChanged('assignment')"
+                              value="addAssignmentPage">
+            <br><br>
+            <button type="button" onmousedown="sendPut()">submit</button>
         </form>
     </div>
 </section>

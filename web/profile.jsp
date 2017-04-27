@@ -60,6 +60,7 @@
             <form id="profileform" method="post">
                 <h1 class="aligncenter bigtitle">Profile</h1>
                 <hr>
+                <p class="aligncenter">User infos:</p>
                 <table>
                     <tr>
                         <td align="right">Username:</td>
@@ -76,8 +77,10 @@
                 </table>
                 <br>
                 <p class="aligncenter">Change password:</p>
-                <input type="password" name="currpass" placeholder="Current password">
                 <input type="password" name="newpass" placeholder="New password">
+                <br>
+                <p class="aligncenter">Enter your password for changes:</p>
+                <input type="password" name="currpass" placeholder="Current password">
                 <div align="center">
                     <a onclick="document.getElementById('profileform').submit();">Update profile</a>
                 </div>

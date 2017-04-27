@@ -35,10 +35,11 @@
     <source src="images/moytains%20(loop).mp4" type="video/mp4">
 </video>
 <nav id="navbar">
-    <h2 class="indent-30" id="menu_title">Menu</h2>
+    <h1 class="indent-30" id="menu_title">Menu</h1>
     <div id="menu">
-        <a href="#"><h3 class="indent-20 menu_item selected_menu_item">Home</h3></a>
-        <a href="userlist"><h3 class="indent-20 menu_item">Users</h3></a>
+        <a href="profile" class="indent-20 menu_item">Profile</a>
+        <a href="curriculum" class="indent-20 menu_item selected_menu_item">Curriculum view</a>
+        <a href="userlist" class="indent-20 menu_item">Users</a>
         <form id='logoutform' action="logout" method="get">
             <input type="submit" value="Logout"
                    name="Logout" id="logout" class="indent-20 menu_item emptybutton">
@@ -55,8 +56,10 @@
     <ul id="sortable">
         <c:forEach items="${pages}" var="item">
             <c:if test="${item.published == false || user.role == 'mentor'}">
-                <li class="card" data-post-id="<c:out value="${item.id}"/>">
-                    <c:out value="${item.title}"/>
+                <li class="card movable" data-post-id="<c:out value="${item.id}"/>">
+                    <h2>
+                        <c:out value="${item.title}"/>
+                    </h2>
                     <hr>
                     <c:if test="${item['class'] == 'class app.pages.TextPage'}">
                         <c:out value="${item.content}"/>

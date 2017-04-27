@@ -1,16 +1,19 @@
 body {
     font-family: monospace;
 
-
-}
-
-#content {
-    padding: 200px 200px 200px 200px;
 }
 
 h1 {
     font-size: 30px;
-    color: #ff3030;
+}
+
+h2 {
+    margin-top: 0.5em;
+    margin-bottom: 0.25em;
+}
+
+.indent-10 {
+    margin-left: 10px;
 }
 
 .indent-20 {
@@ -30,10 +33,10 @@ h1 {
     bottom: 0;
     display: block;
     height: auto;
-    min-width: 150px;
-    -webkit-box-shadow: 10px 4px 34px -8px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 4px 34px -8px rgba(0,0,0,0.75);
-    box-shadow: 10px 4px 34px -8px rgba(0,0,0,0.75);
+    min-width: 200px;
+    -webkit-box-shadow: 10px 4px 34px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 4px 34px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 4px 34px -8px rgba(0, 0, 0, 0.75);
 
 }
 
@@ -42,17 +45,24 @@ h1 {
 }
 
 #content {
-    padding: 2em 0 0 14em;
+    padding: 2em 0 0 19em;
 }
 
 .menu_item {
     color: white;
-    padding: 10px;
+    padding: 20px;
+    margin: 0px;
 }
 
 a {
     text-decoration: none;
-
+    display: block;
+    font-size: 1.17em;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
 }
 
 a:hover {
@@ -60,11 +70,13 @@ a:hover {
 }
 
 .selected_menu_item {
-    background-color: green;
+    background-color: #558B2F;
 }
 
 #company_name {
-    margin-top: 500px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 p {
@@ -80,12 +92,24 @@ p {
 }
 
 .card {
-    padding: 10px 100px 10px 50px;
-    margin: 10px 10px 20px 10px;
-    /*background: rgba(230, 240, 230, .8);*/
-    /*-webkit-box-shadow: 10px 10px 26px -3px rgba(0,0,0,0.75);*/
-    /*-moz-box-shadow: 10px 10px 26px -3px rgba(0,0,0,0.75);*/
-    /*box-shadow: 10px 10px 26px -3px rgba(0,0,0,0.75);*/
+    text-align: center;
+    float: left;
+    margin: 0.5em;
+
+    min-height: 175px;
+    min-width: 300px;
+    max-width: 100%;
+
+    border: 0;
+    list-style-type: none;
+    border-radius: 5px;
+    background: #c2e59c;
+    opacity: 0.95;
+
+}
+
+.movable {
+    cursor: move;
 }
 
 #emaillabel {

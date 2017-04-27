@@ -13,6 +13,7 @@
         @import "style.css";
         @import "backgroundVid.css";
         @import "card.css";
+        @import "cardcreator.css";
     </style>
     <c:if test="${messageFromServlet != null}">
         <div class="alert alert-danger" role="alert">
@@ -31,9 +32,15 @@
     <source src="images/moytains%20(loop).mp4" type="video/mp4">
 </video>
 <nav id="navbar">
-    <h2 class="indent-30" id="menu_title">Menu</h2>
+    <h1 class="indent-30" id="menu_title">Menu</h1>
     <div id="menu">
-        <a href=""><h3 class="indent-20 menu_item selected_menu_item">Register</h3></a>
+        <a href="profile" class="indent-20 menu_item selected_menu_item">Profile</a>
+        <a href="curriculum" class="indent-20 menu_item">Curriculum view</a>
+        <a href="userlist" class="indent-20 menu_item">Users</a>
+        <form id='logoutform' action="logout" method="get">
+            <input type="submit" value="Logout"
+                   name="Logout" id="logout" class="indent-20 menu_item emptybutton">
+        </form>
     </div>
     <div class="indent-20" id="company_name">
         <h5>created by</h5>
@@ -44,14 +51,14 @@
 
 <section id="content">
     <div class="center">
-        <form id="profileform" class="inside" method="post">
-            <h1 class="formtext bigtitle">Profile</h1>
-            <input type="text" class="titletextarea" name="user" placeholder="Username" value="<%=user%>">
-            <input type="text" class="titletextarea" name="email" placeholder="<%=email%>" disabled>
+        <form id="profileform" class="inside creatorform" method="post">
+            <h1 class="aligncenter bigtitle">Profile</h1>
+            <input type="text" name="user" placeholder="Username" value="kaka">
+            <input type="text" name="email" placeholder="kaka@kaka.hu" disabled="">
             <br>
-            <p class="formtext">Change password:</p>
-            <input type="password" class="titletextarea" name="currpass" placeholder="Current password">
-            <input type="password" class="titletextarea" name="newpass" placeholder="New password">
+            <p class="aligncenter">Change password:</p>
+            <input type="password" name="currpass" placeholder="Current password">
+            <input type="password" name="newpass" placeholder="New password">
             <script>
                 var postProfile = function () {
                     var profileform = document.getElementById("profileform");

@@ -32,7 +32,7 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (LoginHelper.checkLogin(request.getSession())) {
+        if (!LoginHelper.checkLogin(request.getSession())) {
             sendStatus(response, 403);
         }
         User currUser = (User) request.getSession().getAttribute("user");
@@ -71,7 +71,7 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (LoginHelper.checkLogin(request.getSession())) {
+        if (!LoginHelper.checkLogin(request.getSession())) {
             response.sendRedirect("/login?loginerror");
         }
         RequestDispatcher login = request.getRequestDispatcher("profile.jsp");

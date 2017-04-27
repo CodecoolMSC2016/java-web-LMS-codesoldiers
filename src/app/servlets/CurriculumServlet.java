@@ -30,7 +30,7 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (LoginHelper.checkLogin(request.getSession())) {
+        if (!LoginHelper.checkLogin(request.getSession())) {
             sendStatus(response, 403);
         }
         PageManager pageManager = PageManager.getInstance();
@@ -48,7 +48,7 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (LoginHelper.checkLogin(request.getSession())) {
+        if (!LoginHelper.checkLogin(request.getSession())) {
             response.sendRedirect("/login?loginerror");
         }
         PageManager pageManager = PageManager.getInstance();
@@ -76,7 +76,7 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (LoginHelper.checkLogin(request.getSession())) {
+        if (!LoginHelper.checkLogin(request.getSession())) {
             sendStatus(response, 403);
         }
         PageManager pageManager = PageManager.getInstance();
@@ -167,7 +167,7 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (LoginHelper.checkLogin(request.getSession())) {
+        if (!LoginHelper.checkLogin(request.getSession())) {
             response.sendRedirect("/login?loginerror");
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("curriculum.jsp");

@@ -23,6 +23,9 @@ public class UserlistServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginHelper.checkLogin(request.getSession())) {
+            response.sendRedirect("/login?loginerror");
+        }
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         String role = user.getRole();

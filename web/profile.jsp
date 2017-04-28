@@ -26,6 +26,7 @@
             <% String message = (String) request.getAttribute("messageFromServlet");%>
             <script>var msg = "<%=message%>";
             alert(msg);
+            window.location= "profile";
             </script>
         </div>
     </c:if>

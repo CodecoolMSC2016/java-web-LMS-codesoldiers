@@ -18,15 +18,16 @@
     <c:if test="${messageFromServlet != null}">
         <div class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <% String message = (String)request.getAttribute("messageFromServlet");%>
+            <% String message = (String) request.getAttribute("messageFromServlet");%>
             <script>var msg = "<%=message%>";
             alert(msg);
+            window.location= "login";
             </script>
         </div>
     </c:if>
 </head>
 <body>
-<video  id="bgvid" playsinline autoplay muted loop>
+<video id="bgvid" playsinline autoplay muted loop>
     <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
     <source src="images/moytains%20(loop).mp4" type="video/webm">
     <source src="images/moytains%20(loop).mp4" type="video/mp4">
@@ -68,15 +69,12 @@
                 <br>
                 <input class="linput" type="password" name="pass" placeholder="Password">
                 <br> <br>
-                <input class="lbutton" type="submit" value="Login"  >
+                <input class="lbutton" type="submit" value="Login">
             </form>
         </div>
     </div>
 </section>
 <div id="videoloop">
-
 </div>
-
-
 </body>
 </html>

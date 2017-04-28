@@ -22,12 +22,7 @@ $(document).ready(function () {
 });
 
 function sendDelete(id) {
-    var values = {};
-    var ser = $('#form').serializeArray();
-    $.each(ser, function (i, field) {
-        values[field.name] = field.value;
-    });
-    console.log(values);
+    var values = {id: id};
     $.ajax({
         method: "DELETE",
         url: "curriculum",
@@ -36,6 +31,6 @@ function sendDelete(id) {
     }).done(function() {
         window.location.href = 'curriculum';
     }).fail(function() {
-        alert( "error" );
+        window.location.href = 'curriculum';
     });
 }

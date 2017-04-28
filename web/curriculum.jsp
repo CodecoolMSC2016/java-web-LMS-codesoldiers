@@ -70,6 +70,7 @@
                         <br>
                         Maximum score: <c:out value="${item.maxScore}"/>
                     </c:if>
+                    <br>
                     <button type="button" onclick="sendDelete(<c:out value="${item.id}"/>)">DELETE</button>
                 </li>
             </c:if>

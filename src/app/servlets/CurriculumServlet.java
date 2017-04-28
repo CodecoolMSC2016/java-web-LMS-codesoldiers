@@ -34,17 +34,29 @@ public class CurriculumServlet extends HttpServlet {
             sendStatus(response, 403);
         }
         PageManager pageManager = PageManager.getInstance();
-        Map<String, String[]> parameterMap = request.getParameterMap();
+
+        String parameterString = convertStreamToString(request.getInputStream()); //1 string, json
+
+        Type type = new TypeToken<Map<String, String>>() {
+        }.getType();
+        Gson gson = new Gson();
+
+        Map<String, String> parameterMap = gson.fromJson(parameterString, type);
+
+
 
         try {
-            int id = Integer.valueOf(request.getParameter("id"));
+            int id = Integer.valueOf(parameterMap.get("id"));
             boolean successful = pageManager.removePageById(id);
             if (successful) {
-                response.sendError(200);
+                sendStatus(response, 201);
+                return;
             }
         } catch (Exception e) {
-            response.sendError(400);
+            sendStatus(response, 404);
         }
+
+        sendStatus(response, 404);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

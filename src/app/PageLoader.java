@@ -79,7 +79,7 @@ public class PageLoader {
 
     public boolean addAssignmentPage(AssignmentPage page) {
         try {
-            if (!checkInputs(page.getTitle()) || checkInputs(page.getQuestion())) {
+            if (!checkInputs(page.getTitle()) || !checkInputs(page.getQuestion())) {
                 throw new SQLException("SQL injection protection");
             }
             String countQ = "SELECT COUNT(*) FROM Pages";

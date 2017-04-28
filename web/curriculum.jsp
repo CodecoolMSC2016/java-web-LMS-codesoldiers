@@ -71,7 +71,10 @@
                         Maximum score: <c:out value="${item.maxScore}"/>
                     </c:if>
                     <br>
-                    <button type="button" onclick="sendDelete(<c:out value="${item.id}"/>)">DELETE</button>
+                    <c:if test="${user.role == 'mentor'}">
+                        <button type="button" onclick="sendDelete(<c:out value="${item.id}"/>)">DELETE</button>
+                    </c:if>
+
                 </li>
             </c:if>
         </c:forEach>

@@ -14,7 +14,7 @@ $(document).ready(function () {
                         posts[parseInt(id)] = order;
                     });
                     var postsJson = JSON.stringify(posts);
-                    $.post("/curriculum", {method: "reorder", json: postsJson});
+                    $.post("curriculum", {method: "reorder", json: postsJson});
                 }
             });
         }

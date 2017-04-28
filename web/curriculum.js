@@ -21,3 +21,21 @@ $(document).ready(function () {
     });
 });
 
+function sendDelete(id) {
+    var values = {};
+    var ser = $('#form').serializeArray();
+    $.each(ser, function (i, field) {
+        values[field.name] = field.value;
+    });
+    console.log(values);
+    $.ajax({
+        method: "DELETE",
+        url: "curriculum",
+        data: JSON.stringify(values),
+        dataType: "json"
+    }).done(function() {
+        window.location.href = 'curriculum';
+    }).fail(function() {
+        alert( "error" );
+    });
+}
